@@ -168,7 +168,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BusinessUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\FineDineContext.cs" />
@@ -245,11 +244,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\BusinessUsers\Create.cshtml" />
-    <Content Include="Views\BusinessUsers\Delete.cshtml" />
-    <Content Include="Views\BusinessUsers\Details.cshtml" />
-    <Content Include="Views\BusinessUsers\Edit.cshtml" />
-    <Content Include="Views\BusinessUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
