@@ -14,5 +14,6 @@ namespace FineDine.Models
         public byte[] ProfilePicture { get; set; }
         public string Address { get; set; }
         public int LocationId { get; set; }
+        public virtual Location Location { get; set; }
     }
 }

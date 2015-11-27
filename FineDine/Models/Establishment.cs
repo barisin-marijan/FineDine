@@ -9,17 +9,17 @@ namespace FineDine.Models
         public string EstablishmentName { get; set; }
         public string EstablishmentDescription { get; set; }
         public int LocationId { get; set; }
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
         public ICollection<byte[]> Gallery { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
         public int BusinessUserId { get; set; }
-        public BusinessUser BusinessUser { get; set; }
+        public virtual BusinessUser BusinessUser { get; set; }
         public float MainRating { get; set; }
         public string PhoneNumber { get; set; }
         public WorkingHours WorkingHours { get; set; }
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
     }
 }
