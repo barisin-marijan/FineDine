@@ -6,7 +6,6 @@ namespace FineDine.Models
     {
         public int Id { get; set; }
         public string TagName { get; set; }
-
         public virtual ICollection<Establishment> Establishments { get; set; }
     }
 }
