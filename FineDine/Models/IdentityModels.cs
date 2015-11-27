@@ -29,5 +29,7 @@ namespace FineDine.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<FineDine.Models.BusinessUser> BusinessUsers { get; set; }
     }
 }
