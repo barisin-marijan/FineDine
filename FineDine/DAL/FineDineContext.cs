@@ -16,5 +16,7 @@ namespace FineDine.DAL
         public DbSet<Location> Locations { get; set; }
         public DbSet<PersonalUser> PersonalUsers { get; set; }
         public DbSet<Tag> Tags { get; set; }
+
+        
     }
 }
