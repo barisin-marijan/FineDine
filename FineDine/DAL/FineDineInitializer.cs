@@ -43,8 +43,8 @@ namespace FineDine.DAL
 
             var Establishments = new List<Establishment>()
             {
-                new Establishment() {EstablishmentName = "Bakini bureci d.o.o.", Location = Locations[0], WorkingHours = new WorkingHours() {Mon_Fri = "radimo", Sat = "radimo i subotom", Sun = "ne radimo nediljon" }, BusinessUser = BusinessUsers[0] },
-                new Establishment() {EstablishmentName = "Didini čvarci d.o.o.", Location = Locations[1], WorkingHours = new WorkingHours() {Mon_Fri = "radimo", Sat = "radimo i subotom", Sun = "ne radimo nediljon" }, BusinessUser = BusinessUsers[1]},
+                new Establishment() {EstablishmentName = "Bakini bureci d.o.o.", Location = Locations[0], WorkingHours  = "ne radimo nediljon" , BusinessUser = BusinessUsers[0] },
+                new Establishment() {EstablishmentName = "Didini čvarci d.o.o.", Location = Locations[1], WorkingHours = "ne radimo nediljon", BusinessUser = BusinessUsers[1]},
             };
             BusinessUsers[0].Establishments = new List<Establishment>() {Establishments[0] };
             BusinessUsers[1].Establishments = new List<Establishment>() { Establishments[1] };

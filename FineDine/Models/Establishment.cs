@@ -17,7 +17,7 @@ namespace FineDine.Models
         public virtual BusinessUser BusinessUser { get; set; }
         public float MainRating { get; set; }
         public string PhoneNumber { get; set; }
-        public WorkingHours WorkingHours { get; set; }        
+        public string WorkingHours { get; set; }        
         public int? CategoryId { get; set; }
         public virtual Category Category { get; set; }
 
