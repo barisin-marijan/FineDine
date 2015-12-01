@@ -17,7 +17,7 @@ namespace FineDine.DAL
                 new Tag() { TagName = "romantic"}
             };
 
-            
+            Tags.ForEach(tag => context.Tags.Add(tag));
 
             var PersonalUsers = new List<PersonalUser>()
             {
@@ -25,7 +25,7 @@ namespace FineDine.DAL
                 new PersonalUser() { FirstName = "Rob" , LastName = "Stark", Email = "rob.stark@winterfell-telecom.ws"},
             };
 
-            
+            PersonalUsers.ForEach(personaluser => context.PersonalUsers.Add(personaluser));
 
             var BusinessUsers = new List<BusinessUser>()
             {
@@ -33,7 +33,7 @@ namespace FineDine.DAL
                 new BusinessUser() { FirstName = "Rob" , LastName = "Stark", Email = "rob.stark@winterfell-telecom.ws"},
             };
 
-            
+            BusinessUsers.ForEach(businessuser => context.BusinessUsers.Add(businessuser));
 
             var Locations = new List<Location>()
             {
@@ -51,19 +51,8 @@ namespace FineDine.DAL
             Locations[0].Establishments = new List<Establishment>() {Establishments[0] };
             Locations[1].Establishments = new List<Establishment>() { Establishments[1] };
 
-            PersonalUsers[0].Location = Locations[0];
-            PersonalUsers[1].Location = Locations[1];
-
-            BusinessUsers[0].Location = Locations[0];
-            BusinessUsers[1].Location = Locations[1];
-
-            PersonalUsers.ForEach(personaluser => context.PersonalUsers.Add(personaluser));
-            BusinessUsers.ForEach(businessuser => context.BusinessUsers.Add(businessuser));
-
             Locations.ForEach(location => context.Locations.Add(location));
             Establishments.ForEach(establishment => context.Establishments.Add(establishment));
-
-            Tags.ForEach(tag => context.Tags.Add(tag));
 
             context.SaveChanges();
         }
