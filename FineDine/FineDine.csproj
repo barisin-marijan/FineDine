@@ -177,6 +177,34 @@
     <Compile Include="Migrations\201511031640243_InitialCreate.Designer.cs">
       <DependentUpon>201511031640243_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512051522595_FirstName.cs" />
+    <Compile Include="Migrations\201512051522595_FirstName.Designer.cs">
+      <DependentUpon>201512051522595_FirstName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512051523363_LastName.cs" />
+    <Compile Include="Migrations\201512051523363_LastName.Designer.cs">
+      <DependentUpon>201512051523363_LastName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512051524016_FullName.cs" />
+    <Compile Include="Migrations\201512051524016_FullName.Designer.cs">
+      <DependentUpon>201512051524016_FullName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512051524223_Address.cs" />
+    <Compile Include="Migrations\201512051524223_Address.Designer.cs">
+      <DependentUpon>201512051524223_Address.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512051524576_Comments.cs" />
+    <Compile Include="Migrations\201512051524576_Comments.Designer.cs">
+      <DependentUpon>201512051524576_Comments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512051525167_Establishments.cs" />
+    <Compile Include="Migrations\201512051525167_Establishments.Designer.cs">
+      <DependentUpon>201512051525167_Establishments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512051525302_Location.cs" />
+    <Compile Include="Migrations\201512051525302_Location.Designer.cs">
+      <DependentUpon>201512051525302_Location.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -259,6 +287,27 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511031640243_InitialCreate.resx">
       <DependentUpon>201511031640243_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512051522595_FirstName.resx">
+      <DependentUpon>201512051522595_FirstName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512051523363_LastName.resx">
+      <DependentUpon>201512051523363_LastName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512051524016_FullName.resx">
+      <DependentUpon>201512051524016_FullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512051524223_Address.resx">
+      <DependentUpon>201512051524223_Address.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512051524576_Comments.resx">
+      <DependentUpon>201512051524576_Comments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512051525167_Establishments.resx">
+      <DependentUpon>201512051525167_Establishments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512051525302_Location.resx">
+      <DependentUpon>201512051525302_Location.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
