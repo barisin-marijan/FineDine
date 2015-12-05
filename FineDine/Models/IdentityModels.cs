@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace FineDine.Models
 {
@@ -13,6 +14,10 @@ namespace FineDine.Models
         public string LastName { get; set; }
         public string FullName { get; set; }
         public string Address { get; set; }
+
+        public virtual List<Comment> Comments { get; set; }
+        public virtual List<Establishment> Establishments { get; set; }
+        public virtual Location Location { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
