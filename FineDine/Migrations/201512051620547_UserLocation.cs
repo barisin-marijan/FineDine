@@ -3,7 +3,7 @@ namespace FineDine.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Location : DbMigration
+    public partial class UserLocation : DbMigration
     {
         public override void Up()
         {

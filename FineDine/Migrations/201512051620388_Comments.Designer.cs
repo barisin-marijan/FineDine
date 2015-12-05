@@ -13,12 +13,12 @@ namespace FineDine.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201512051524576_Comments"; }
+            get { return "201512051620388_Comments"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target

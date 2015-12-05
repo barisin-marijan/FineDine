@@ -7,13 +7,13 @@ namespace FineDine.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Establishments : IMigrationMetadata
+    public sealed partial class UserLocation : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Establishments));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UserLocation));
         
         string IMigrationMetadata.Id
         {
-            get { return "201512051525167_Establishments"; }
+            get { return "201512051620547_UserLocation"; }
         }
         
         string IMigrationMetadata.Source

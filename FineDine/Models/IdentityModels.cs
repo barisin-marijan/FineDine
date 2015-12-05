@@ -17,7 +17,7 @@ namespace FineDine.Models
 
         public virtual List<Comment> Comments { get; set; }
         public virtual List<Establishment> Establishments { get; set; }
-        public virtual Location Location { get; set; }
+        public virtual Location UserLocation { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

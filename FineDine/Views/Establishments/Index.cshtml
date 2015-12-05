@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Adress)
+            @Html.DisplayNameFor(model => model.Address)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.WorkingHours)
@@ -26,6 +26,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Owner.UserName)
+        </th>
         <th></th>
     </tr>
 
@@ -35,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Adress)
+            @Html.DisplayFor(modelItem => item.Address)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.WorkingHours)
@@ -45,6 +51,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Owner.UserName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
