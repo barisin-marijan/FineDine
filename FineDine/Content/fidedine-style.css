@@ -213,3 +213,18 @@ p.copyright {
     color: #333;
     text-decoration:none;
 }
+
+.glyphicon-star, .glyphicon-star-empty
+{
+    color: orange;
+    font-size: 120%;
+}
+
+.ratingLabel
+{
+    font-size: 120%;
+}
+
+#WorkingHours{ 
+     width: 305px;
+    } 

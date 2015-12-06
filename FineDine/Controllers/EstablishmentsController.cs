@@ -86,6 +86,7 @@ namespace FineDine.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.workingHours = establishment.WorkingHours;
             return View(establishment);
         }
 
