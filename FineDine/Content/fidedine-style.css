@@ -197,3 +197,19 @@ p.copyright {
 .center-align{
     text-align:center;
 }
+
+.main-rating{
+    color: forestgreen;
+    font-size: 50px;
+}
+
+.links a{
+    color: #777; 
+    font-size: 14px;
+    cursor: auto;
+}
+
+.links a:hover{
+    color: #333;
+    text-decoration:none;
+}
