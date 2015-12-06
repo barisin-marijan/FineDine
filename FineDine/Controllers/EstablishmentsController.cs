@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using FineDine.DAL;
 using FineDine.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FineDine.Controllers
 {
@@ -19,7 +21,17 @@ namespace FineDine.Controllers
         public ActionResult Index()
         {
             var establishments = db.Establishments.Include(e => e.BusinessUser).Include(e => e.Category).Include(e => e.Location);
+
+            
+
             return View(establishments.ToList());
+            /*var lista_establishmenta = new List<Establishment>();
+            foreach (var estblshmnt in establishments)
+            {
+                if (estblshmnt.Location.City == "Split")
+                    lista_establishmenta.Add(estblshmnt);                 
+            }
+            return View(lista_establishmenta);*/
         }
 
         // GET: Establishments/Details/5
