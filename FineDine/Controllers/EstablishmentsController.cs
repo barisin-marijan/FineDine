@@ -16,7 +16,7 @@ namespace FineDine.Controllers
 
         // GET: Establishments
         public ActionResult Index()
-        {
+        {            
             return View(db.Establishments.ToList());
         }
 

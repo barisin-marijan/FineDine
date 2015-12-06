@@ -238,6 +238,7 @@
     <Content Include="img\intro-bg.jpg" />
     <Content Include="img\ipad.png" />
     <Content Include="img\phones.png" />
+    <Content Include="img\restaurant_icon.jpg" />
     <Content Include="img\welcome.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -32,33 +32,42 @@ namespace FineDine.Migrations
             //
 
 
-            var Establishments = new List<Establishment>()
+            /* var Establishments = new List<Establishment>()
+             {
+                 new Establishment() {Name = "Pekara Juriæ", Address ="Šimiæeva 2", Description="Pekara vrlo atraktivnih peciva."},
+                 new Establishment() {Name = "Restoran Apetit", Address ="Voæni trg 7", Description="Jeftin restoran u centru grada."},
+             };
+
+             var Locations = new List<Location>()
+             {
+                 new Location() {City="Solin", Country = "Croatia", PostCode = "21210" },
+                 new Location() {City="Split", Country = "Croatia", PostCode = "21000" },
+             };
+
+             Establishments[0].Location = Locations[0];
+             Establishments[1].Location = Locations[1];
+
+             var DbUsersList = context.Users.ToList();
+
+             Establishments[0].Owner = DbUsersList[0];
+             Establishments[1].Owner = DbUsersList[0];
+
+             Locations[0].Establishments = new List<Establishment>() { Establishments[0] };
+             Locations[1].Establishments = new List<Establishment>() { Establishments[1] };
+
+             Establishments.ForEach(estbl => context.Establishments.Add(estbl));
+             Locations.ForEach(loc => context.Locations.Add(loc));
+
+             */
+
+            var IdentityRoles = new List<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>()
             {
-                new Establishment() {Name = "Pekara Juriæ", Address ="Šimiæeva 2", Description="Pekara vrlo atraktivnih peciva."},
-                new Establishment() {Name = "Restoran Apetit", Address ="Voæni trg 7", Description="Jeftin restoran u centru grada."},
+                new Microsoft.AspNet.Identity.EntityFramework.IdentityRole() {Name = "Administrator" },
+                new Microsoft.AspNet.Identity.EntityFramework.IdentityRole() {Name = "PersonalUser" },
+                new Microsoft.AspNet.Identity.EntityFramework.IdentityRole() {Name = "BusinessUser" },
             };
 
-            var Locations = new List<Location>()
-            {
-                new Location() {City="Solin", Country = "Croatia", PostCode = "21210" },
-                new Location() {City="Split", Country = "Croatia", PostCode = "21000" },
-            };
-
-            Establishments[0].Location = Locations[0];
-            Establishments[1].Location = Locations[1];
-
-            var DbUsersList = context.Users.ToList();
-
-            Establishments[0].Owner = DbUsersList[0];
-            Establishments[1].Owner = DbUsersList[0];
-
-            Locations[0].Establishments = new List<Establishment>() { Establishments[0] };
-            Locations[1].Establishments = new List<Establishment>() { Establishments[1] };
-
-            Establishments.ForEach(estbl => context.Establishments.Add(estbl));
-            Locations.ForEach(loc => context.Locations.Add(loc));
-
-
+            IdentityRoles.ForEach(ir => context.Roles.Add(ir));
 
         }
     }

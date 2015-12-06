@@ -4,66 +4,39 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container">
+    <div class="container" style="padding: 50px 15px 50px 15px">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkingHours)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MainRating)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Location.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Owner.UserName)
-        </th>
-        <th></th>
-    </tr>
+        <h2>Your establishments</h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkingHours)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MainRating)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Owner.UserName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        
 
-</table>
+            @foreach (var item in Model)
+            {
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" src="~/img/restaurant_icon.jpg" alt="Restaurant icon">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">@Html.ActionLink(item.Name, "Details", new { id = item.Id })</h4>
+                        @Html.DisplayFor(modelItem => item.Address)<br/>
+                        Prosjecni rating: @Html.DisplayFor(modelItem => item.MainRating)
+                    </div>
+                    <div class="media-right">
+                        <span>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</span>
+                        <span>@Html.ActionLink("Details", "Details", new { id = item.Id })</span>
+                        <span>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</span>
+                    </div>
+                </div>
+                <hr/>               
+            }
+
+       
+        
+    </div>
+</div>
