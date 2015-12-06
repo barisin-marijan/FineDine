@@ -230,6 +230,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\banner-bg.jpg" />
+    <Content Include="img\buttonbckg.jpg" />
+    <Content Include="img\button_background.bmp" />
     <Content Include="img\dog.png" />
     <Content Include="img\intro-bg.jpg" />
     <Content Include="img\ipad.png" />

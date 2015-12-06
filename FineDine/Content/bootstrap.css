@@ -2509,7 +2509,7 @@ legend {
 label {
   display: inline-block;
   max-width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 7.5px;
   font-weight: bold;
 }
 input[type="search"] {
@@ -2550,10 +2550,10 @@ output {
 }
 .form-control {
   display: block;
-  width: 100%;
-  height: 34px;
+  width: auto;
+  height: 50px;
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 24px;
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
@@ -3831,7 +3831,7 @@ tbody.collapse.in {
   z-index: 2;
   float: left;
   width: 100%;
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 .input-group .form-control:focus {
   z-index: 3;

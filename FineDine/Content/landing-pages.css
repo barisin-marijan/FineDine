@@ -168,3 +168,11 @@ footer {
 p.copyright {
     margin: 15px 0 0;
 }
+
+#home-search {
+    height:110px;
+    width: 160px;
+    padding-left:0;
+    font-size: 24px;
+    background:url(../img/button_background.bmp) no-repeat center center;
+}

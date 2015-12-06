@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <title>@ViewBag.Title - FineDine</title>
     <!-- Bootstrap Core CSS -->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="~/Content/landing-pages.css" rel="stylesheet">
     <!-- Custom Fonts -->
@@ -30,19 +30,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="#">Start Bootstrap</a>
+                <a class="navbar-brand topnav" href="#">FineDine</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#about">About</a>
+                        @Html.ActionLink("Home", "Index", "Home")
                     </li>
                     <li>
-                        <a href="#services">Services</a>
+                        @Html.ActionLink("Establishments", "Index", "Establishments")
                     </li>
                     <li>
-                        <a href="#contact">Contact</a>
+                        @Html.ActionLink("About us", "Index", "About")
                     </li>
                 </ul>
             </div>
@@ -61,11 +61,7 @@
                 <div class="col-lg-12" style="text-align: center">
                     <ul class="list-inline">
                         <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#about">About</a>
+                            @Html.ActionLink("Home", "Index", "Home")
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
@@ -73,7 +69,7 @@
                         </li>
                         <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#contact">Contact</a>
+                            @Html.ActionLink("About us", "Index", "About")
                         </li>
                     </ul>
                     <p class="copyright text-muted small">Copyright &copy; FineDine 2015. All Rights Reserved</p>
