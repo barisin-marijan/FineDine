@@ -85,8 +85,7 @@ namespace FineDine.Controllers
                 db.Entry(establishment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            ViewBag.workingHours = establishment.WorkingHours;
+            }            
             return View(establishment);
         }
 

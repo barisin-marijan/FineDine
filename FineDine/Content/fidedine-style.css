@@ -225,6 +225,6 @@ p.copyright {
     font-size: 120%;
 }
 
-#WorkingHours{ 
+#WorkingHours, #MainRating{ 
      width: 305px;
     } 
