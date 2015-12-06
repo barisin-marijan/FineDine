@@ -50,7 +50,7 @@ namespace FineDine.Migrations
             var DbUsersList = context.Users.ToList();
 
             Establishments[0].Owner = DbUsersList[0];
-            Establishments[1].Owner = DbUsersList[1];
+            Establishments[1].Owner = DbUsersList[0];
 
             Locations[0].Establishments = new List<Establishment>() { Establishments[0] };
             Locations[1].Establishments = new List<Establishment>() { Establishments[1] };
