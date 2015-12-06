@@ -173,6 +173,7 @@ p.copyright {
     height:110px;
     width: 160px;
     padding-left:0;
+    padding-right:0;
     font-size: 24px;
     background:url(../img/button_background.bmp) no-repeat center center;
 }
@@ -187,4 +188,12 @@ p.copyright {
 
 .title{
     font-size: 20px;
+}
+
+.finedine-text{
+    font-size: 19px;
+}
+
+.center-align{
+    text-align:center;
 }
