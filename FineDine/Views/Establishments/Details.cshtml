@@ -4,55 +4,75 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Establishment</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
+<div class="container" style="padding: 0 15px 50px 15px">
+    <div class="col-md-8">
+        <h1 class="page-header">
             @Html.DisplayFor(model => model.Name)
-        </dd>
+            <small>
+                @Html.DisplayFor(model => model.Location.City),
+                @Html.DisplayFor(model => model.Location.Country)
+            </small>
+        </h1>
+        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+        <hr>
+        <div class="col-lg-3 col-md-3 col-sm-3 thumb">
+            <a class="thumbnail" href="#">
+                <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 thumb">
+            <a class="thumbnail" href="#">
+                <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 thumb">
+            <a class="thumbnail" href="#">
+                <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+            </a>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 thumb">
+            <a class="thumbnail" href="#">
+                <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+            </a>
+        </div>
+        <p class="finedine-text"> @Html.DisplayFor(model => model.Description)</p>
+        <small class="links">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </small>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkingHours)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WorkingHours)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MainRating)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MainRating)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
+        <!-- Third Blog Post -->
+        <h2>
+            <a href="#">Blog Post Title</a>
+        </h2>
+        <p class="lead">
+            by <a href="index.php">Start Bootstrap</a>
+        </p>
+        <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
+        <hr>
+        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+        <hr>
+        <p>@Html.DisplayFor(model => model.Description)</p>
+        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+        <hr>
+        Load more...
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <!-- Blog Sidebar Widgets Column -->
+    <div class="col-md-4" style="margin-top:150px;">
+        <!-- Side Widget Well -->
+        <div class="well">
+            <h4>Additional information:</h4>
+            <p class="finedine-text">
+                Adress: @Html.DisplayFor(model => model.Address)
+                <br />
+                City: @Html.DisplayFor(model => model.Location.PostCode) @Html.DisplayFor(model => model.Location.City)
+                <br/>
+                Owner: @Html.DisplayFor(model => model.Owner.UserName)
+                <br />
+                Working hours: @Html.DisplayFor(model => model.WorkingHours)
+                <br />
+                <p class="main-rating"> @Html.DisplayFor(model => model.MainRating) / 5.0 </p>
+            </p>
+        </div>
+    </div>
+</div>
