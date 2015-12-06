@@ -59,7 +59,8 @@ namespace FineDine.Migrations
              Locations.ForEach(loc => context.Locations.Add(loc));
 
              */
-
+             
+            /*
             var IdentityRoles = new List<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>()
             {
                 new Microsoft.AspNet.Identity.EntityFramework.IdentityRole() {Name = "Administrator" },
@@ -68,7 +69,7 @@ namespace FineDine.Migrations
             };
 
             IdentityRoles.ForEach(ir => context.Roles.Add(ir));
-
+            */
         }
     }
 }

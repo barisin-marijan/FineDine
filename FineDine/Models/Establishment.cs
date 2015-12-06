@@ -13,6 +13,7 @@ namespace FineDine.Models
         public string WorkingHours { get; set; }
         public double? MainRating { get; set; }
         public string Description { get; set; }
+        public string PhoneNumber { get; set; }
 
         public virtual ApplicationUser Owner { get; set; }
         public virtual List<Comment> Comments { get; set; }

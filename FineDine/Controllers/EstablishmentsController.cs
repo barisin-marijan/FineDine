@@ -46,7 +46,7 @@ namespace FineDine.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description")] Establishment establishment)
+        public ActionResult Create([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description,PhoneNumber")] Establishment establishment)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace FineDine.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description")] Establishment establishment)
+        public ActionResult Edit([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description,PhoneNumber")] Establishment establishment)
         {
             if (ModelState.IsValid)
             {
