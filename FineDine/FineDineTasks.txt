@@ -1,0 +1,12 @@
+Story:
+- sredi unos lokacija za establishmente
+- dodat role za korisnike
+- uploadanje slika za korisnike
+- uploadanje slika za establishmente
+
+Bugs:
+
+Tasks:
+- popravit da search botun ide unovi red
+- prominit u text area -> description
+- smanjit slova kod unosa i edita

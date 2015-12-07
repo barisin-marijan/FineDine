@@ -205,13 +205,17 @@ p.copyright {
 
 .links a{
     color: #777; 
-    font-size: 14px;
     cursor: auto;
+}
+
+.links-size a{
+    font-size: 14px;
 }
 
 .links a:hover{
     color: #333;
     text-decoration:none;
+    cursor: pointer;
 }
 
 .glyphicon-star, .glyphicon-star-empty
@@ -228,3 +232,7 @@ p.copyright {
 #WorkingHours, #MainRating{ 
      width: 305px;
     } 
+
+.little-margin a{
+    margin: 2px;
+}

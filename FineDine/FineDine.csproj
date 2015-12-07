@@ -225,6 +225,7 @@
     <Content Include="Content\fidedine-style.css" />
     <Content Include="Content\thumbnail-gallery.css" />
     <Content Include="favicon.ico" />
+    <Content Include="FineDineTasks.txt" />
     <Content Include="fonts\css\font-awesome.css" />
     <Content Include="fonts\css\font-awesome.min.css" />
     <Content Include="fonts\fonts\fontawesome-webfont.svg" />
