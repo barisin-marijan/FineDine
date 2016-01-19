@@ -56,6 +56,15 @@
                     @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
                 </div>
             </div>
+
+            <div class="form-group">
+                <label>Vrsta korisnika:</label>
+                <div class="col-md-10">
+                    <input type="radio" name="role" value="personal">Personal User<br />
+                    <input type="radio" name="roler" value="business">Business User
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" class="btn btn-default" value="Register" />

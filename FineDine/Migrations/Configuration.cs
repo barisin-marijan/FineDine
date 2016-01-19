@@ -6,7 +6,7 @@ namespace FineDine.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    
+
 
     internal sealed class Configuration : DbMigrationsConfiguration<FineDine.Models.ApplicationDbContext>
     {
@@ -59,7 +59,7 @@ namespace FineDine.Migrations
              Locations.ForEach(loc => context.Locations.Add(loc));
 
              */
-             
+
             /*
             var IdentityRoles = new List<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>()
             {
@@ -70,6 +70,9 @@ namespace FineDine.Migrations
 
             IdentityRoles.ForEach(ir => context.Roles.Add(ir));
             */
+
+           
+
         }
     }
 }

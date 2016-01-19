@@ -96,6 +96,10 @@ namespace FineDine.Models
         [Display(Name = "Address")]
         public string Address { get; set; }
 
+        [Required]
+        [Display(Name = "Role")]
+        public string Role { get; set; }
+
 
     }
 
