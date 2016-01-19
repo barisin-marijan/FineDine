@@ -1,6 +1,15 @@
 ﻿@{
     ViewBag.Title = "Home";
 }
+
+<script>
+    System.defaultJSExtensions = true;
+    System.config({
+        baseURL: '/Scripts/node_modules/'
+    });
+    System.import("/Scripts/App/app");
+</script>
+
 <a name="about"></a>
 <div class="intro-header">
     <div class="container">
