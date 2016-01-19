@@ -39,23 +39,48 @@
         <small class="links">
             @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
             @Html.ActionLink("Back to List", "Index")
-        </small>
+        </small>        
 
-        <!-- Third Blog Post -->
-        <h2>
-            <a href="#">Blog Post Title</a>
-        </h2>
-        <p class="lead">
-            by <a href="index.php">Start Bootstrap</a>
-        </p>
-        <p><span class="glyphicon glyphicon-time"></span> Posted on August 28, 2013 at 10:45 PM</p>
-        <hr>
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
-        <hr>
-        <p>@Html.DisplayFor(model => model.Description)</p>
-        <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-        <hr>
-        Load more...
+        <!-- COMMENTS inace se generiraju iz baze, ali za sada su hardcodirani-->
+        <h3>Users' comments:</h3>
+        <div class="media links">
+            <div class="media-left">                
+                    <img class="media-object" src="http://placehold.it/80x80" alt="placeholder">               
+            </div>
+            <div class="media-body">
+                <a><h4 class="media-heading">jjozic22</h4></a>
+                <span class="ratingLabel">Ocjena: </span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span><br/>                
+                Odličan restoran, djevojka i ja smo dosta jeftino prošli za meni od tri slijeda.<br/>                
+            </div>
+        </div>
+
+        <div class="media links">
+            <div class="media-left">
+                <img class="media-object" src="http://placehold.it/80x80" alt="placeholder">
+            </div>
+            <div class="media-body">
+                <a><h4 class="media-heading">mseric65</h4></a>
+                <span class="ratingLabel">Rating: </span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star-empty"></span><br/>
+                Lokacija odlična, jela imaju dobar omjer cijene i kvalitete. Ocjena manje radi prevelike buke.<br />
+            </div>
+            <hr>
+            
+        </div>
+        <div class="links" style="text-align:center;">
+            <a>Load more...</a>
+        </div>
+        
+        
 </div>
     <!-- Blog Sidebar Widgets Column -->
     <div class="col-md-4" style="margin-top:150px;">
@@ -67,11 +92,20 @@
                 <br />
                 City: @Html.DisplayFor(model => model.Location.PostCode) @Html.DisplayFor(model => model.Location.City)
                 <br/>
+                Phone number: @Html.DisplayFor(model => model.PhoneNumber)
+                <br/>
                 Owner: @Html.DisplayFor(model => model.Owner.UserName)
                 <br />
                 Working hours: @Html.DisplayFor(model => model.WorkingHours)
-                <br />
-                <p class="main-rating"> @Html.DisplayFor(model => model.MainRating) / 5.0 </p>
+                <div class="center-align" style="padding-top:5px;">
+                    <br/>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    <p class="main-rating"> @Html.DisplayFor(model => model.MainRating) / 5.0 </p>
+                </div>
             </p>
         </div>
     </div>

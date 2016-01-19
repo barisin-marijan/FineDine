@@ -231,6 +231,7 @@
     <Content Include="Content\fidedine-style.css" />
     <Content Include="Content\thumbnail-gallery.css" />
     <Content Include="favicon.ico" />
+    <Content Include="FineDineTasks.txt" />
     <Content Include="fonts\css\font-awesome.css" />
     <Content Include="fonts\css\font-awesome.min.css" />
     <Content Include="fonts\fonts\fontawesome-webfont.svg" />
@@ -246,6 +247,7 @@
     <Content Include="img\intro-bg.jpg" />
     <Content Include="img\ipad.png" />
     <Content Include="img\phones.png" />
+    <Content Include="img\restaurant_icon.jpg" />
     <Content Include="img\welcome.jpg" />
     <Content Include="Scripts\node_modules\angular2\animate.js" />
     <Content Include="Scripts\node_modules\angular2\animate\testing.js" />
