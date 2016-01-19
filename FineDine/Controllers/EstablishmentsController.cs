@@ -7,13 +7,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FineDine.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace FineDine.Controllers
 {
     public class EstablishmentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        
+        
         // GET: Establishments
         public ActionResult Index()
         {            
@@ -44,12 +47,19 @@ namespace FineDine.Controllers
         // POST: Establishments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description,PhoneNumber")] Establishment establishment)
+        public ActionResult Create([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description,PhoneNumber,Tags,Owner")] Establishment establishment)
         {
             if (ModelState.IsValid)
             {
+                
+                var currentUserId = User.Identity.GetUserId();
+                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+                var currentUser = manager.FindById(User.Identity.GetUserId());
+
+                establishment.Owner = currentUser;
                 db.Establishments.Add(establishment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
