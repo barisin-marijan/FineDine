@@ -151,9 +151,8 @@ namespace FineDine.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, FullName = model.FirstName + " " + model.LastName };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -166,14 +165,9 @@ namespace FineDine.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     if (role == "personal")
-                    {
                         await this.UserManager.AddToRoleAsync(user.Id, "PersonalUser");
-                    }
-
-                    if (role == "business")
-                    {
+                    else if (role == "business")
                         await this.UserManager.AddToRoleAsync(user.Id, "BusinessUser");
-                    }
 
                     return RedirectToAction("Index", "Home");
                 }

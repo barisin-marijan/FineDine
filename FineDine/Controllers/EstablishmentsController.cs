@@ -50,7 +50,7 @@ namespace FineDine.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description,PhoneNumber,Owner")] Establishment establishment, string category, string Tags)
+        public ActionResult Create([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description,PhoneNumber,Owner")] Establishment establishment, string category, string country, string city, string postalcode, string Tags)
         {
             if (ModelState.IsValid)
             {
@@ -93,6 +93,49 @@ namespace FineDine.Controllers
                         establishment.Tags.Add(databaseTag);
                     }
                 }
+
+                var locationList = db.Locations.ToList();
+
+                Location newLocation = new Location() {City = city, PostCode=postalcode };
+                bool locationFlag = true;
+
+                if (country == "hr")
+                    newLocation.Country = "Croatia";
+                else if (country == "de")
+                    newLocation.Country = "Germany";
+                else if (country == "uk")
+                    newLocation.Country = "United Kingdom";
+                else if (country == "usa")
+                    newLocation.Country = "USA";
+
+                foreach (var location in locationList)
+                {
+                    if (country == "hr" && location.Country == "Croatia" && location.City == city && location.PostCode == postalcode)
+                    {
+                        newLocation = location;
+                        locationFlag = false;
+                    }
+                    else if (country == "de" && location.Country == "Germany" && location.City == city && location.PostCode == postalcode)
+                    {
+                        newLocation = location;
+                        locationFlag = false;
+                    }
+                    else if (country == "uk" && location.Country == "United Kingdom" && location.City == city && location.PostCode == postalcode)
+                    {
+                        newLocation = location;
+                        locationFlag = false;
+                    }
+                    else if (country == "usa" && location.Country == "USA" && location.City == city && location.PostCode == postalcode)
+                    {
+                        newLocation = location;
+                        locationFlag = false;
+                    }
+                }
+
+                if(locationFlag)
+                    db.Locations.Add(newLocation);
+
+                establishment.Location = newLocation;
 
                 var categoriesList = db.Categories.ToList();                
                 if(category == "restaurant")                
