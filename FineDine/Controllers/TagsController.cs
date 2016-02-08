@@ -46,16 +46,18 @@ namespace FineDine.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Tag tag)
+        public ActionResult Create([Bind(Include = "Id,Name")] Tag[] tags)
         {
             if (ModelState.IsValid)
             {
-                db.Tags.Add(tag);
+                foreach (var tag in tags) {
+                    db.Tags.Add(tag);                    
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tag);
+            return View(tags[0]);
         }
 
         // GET: Tags/Edit/5

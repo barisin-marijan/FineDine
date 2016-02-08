@@ -50,7 +50,7 @@ namespace FineDine.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description,PhoneNumber,Tags,Owner")] Establishment establishment)
+        public ActionResult Create([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description,PhoneNumber,Owner")] Establishment establishment, string Tags)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,43 @@ namespace FineDine.Controllers
                 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
                 var currentUser = manager.FindById(User.Identity.GetUserId());
 
+                //while (var tag in establishment.Tags)
+                //{ }
+
+
                 establishment.Owner = currentUser;
+                Tags = " " + Tags;
+                string[] parsedTags = Tags.Split(new char[] { ' ', '#' });
+                //string[] parsedTags = Tags.Split(" #",0);
+                establishment.Tags = new List<Tag>();   
+                var tagsList = db.Tags.ToList();
+
+                foreach (var enteredTag in parsedTags)
+                {
+                    if (enteredTag != " " && enteredTag != "")
+                    {
+                        var newTag = new Tag() { Name = enteredTag };
+                        Tag databaseTag = newTag;
+                        bool flag = true;
+                        foreach (var tag in tagsList)
+                        {
+                            if (enteredTag == tag.Name)
+                            {
+                                databaseTag = tag;
+                                flag = false;
+                                break;
+                            }
+                        }
+
+                        if (flag)
+                            db.Tags.Add(databaseTag);
+
+                        establishment.Tags.Add(databaseTag);
+                    }
+                }
+
+                
+
                 db.Establishments.Add(establishment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
