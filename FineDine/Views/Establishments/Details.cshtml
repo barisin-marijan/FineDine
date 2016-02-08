@@ -88,6 +88,8 @@
         <div class="well">
             <h4>Additional information:</h4>
             <p class="finedine-text">
+                Category: @Html.DisplayFor(model => model.Category.Name)
+                <br />
                 Adress: @Html.DisplayFor(model => model.Address)
                 <br />
                 City: @Html.DisplayFor(model => model.Location.PostCode) @Html.DisplayFor(model => model.Location.City)

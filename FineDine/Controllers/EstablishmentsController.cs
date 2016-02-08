@@ -50,7 +50,7 @@ namespace FineDine.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description,PhoneNumber,Owner")] Establishment establishment, string Tags)
+        public ActionResult Create([Bind(Include = "Id,Name,Address,WorkingHours,MainRating,Description,PhoneNumber,Owner")] Establishment establishment, string category, string Tags)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,15 @@ namespace FineDine.Controllers
                     }
                 }
 
-                
+                var categoriesList = db.Categories.ToList();                
+                if(category == "restaurant")                
+                    establishment.Category = categoriesList[0];                
+                else if (category == "fastfood")
+                    establishment.Category = categoriesList[1];
+                else if (category == "bar")
+                    establishment.Category = categoriesList[2];
+                else if (category == "coffeeshop")
+                    establishment.Category = categoriesList[3];
 
                 db.Establishments.Add(establishment);
                 db.SaveChanges();

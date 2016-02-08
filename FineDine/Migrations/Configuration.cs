@@ -69,10 +69,18 @@ namespace FineDine.Migrations
             };
 
             IdentityRoles.ForEach(ir => context.Roles.Add(ir));
+            
+
+            var Categories = new List<Category>()
+             {
+                 new Category() {Name = "Restaurant" },
+                 new Category() {Name = "Fast Food" },
+                 new Category() {Name = "Bar" },
+                 new Category() {Name = "Coffee Shop" }
+             };
+
+            Categories.ForEach(cat => context.Categories.Add(cat));
             */
-
-           
-
         }
     }
 }
