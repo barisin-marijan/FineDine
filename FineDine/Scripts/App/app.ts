@@ -10,7 +10,7 @@ import {Establishment} from "./../Model/Establishment"
 //import {TodoList} from "./Components/TodoList"
 //import {TodoService} from "./Services/TodoService"
 
-import {Http, HTTP_PROVIDERS} from 'angular2/http';
+
 import {ROUTER_PROVIDERS} from 'angular2/router';
 
 @Component({
@@ -22,17 +22,17 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
         <div class="well">
             <h4>Additional information:</h4>
             <div class="finedine-text">
-                Category: @Html.DisplayFor(model => model.Category.Name)
+                Category: {{establishment.CategoryName}}
                 <br />
-                Adress: @Html.DisplayFor(model => model.Address)
+                Address: {{establishment.Address}}
                 <br />
-                City: @Html.DisplayFor(model => model.Location.PostCode) @Html.DisplayFor(model => model.Location.City)
+                City: {{establishment.PostalCode}} {{establishment.City}}
                 <br/>
-                Phone number: @Html.DisplayFor(model => model.PhoneNumber)
+                Phone number: {{establishment.PhoneNumber}}
                 <br/>
-                Owner: @Html.DisplayFor(model => model.Owner.UserName)
+                Owner: {{establishment.Owner}}
                 <br />
-                Working hours: @Html.DisplayFor(model => model.WorkingHours)
+                Working hours: {{establishment.WorkingHours}}
                 <div class="center-align" style="padding-top:5px;">
                     <br/>
                     <span class="glyphicon glyphicon-star"></span>
@@ -40,29 +40,31 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star-empty"></span>
-                    <p class="main-rating"> @Html.DisplayFor(model => model.MainRating) / 5.0 </p>
+                    <p class="main-rating"> {{establishment.MainRating}} / 5.0 </p>
                 </div>
             </div>
         </div>
 `
 })
 export class EstablishmentDetails {
-    private establishment: Establishment = new Establishment();
+    public establishment: Establishment = new Establishment();
     private http: Http;
+    dbId: number;
 
     constructor(http: Http)
     {
         this.http = http;
-        this.establishment.Id = Number.parseInt(document.getElementById("establishment-details").getAttribute("dbId"));
-        this.fetchEstablishment(this.establishment.Id);
+        this.dbId = Number.parseInt(document.getElementById("establishment-details").getAttribute("dbId"));
+        this.fetchEstablishment(this.dbId);
     }
 
     public fetchEstablishment(id: number): void
     {
-        let request = this.http.request("/api/Establishment/" + id.toString());
+        let request = this.http.request("/api/EstablishmentsApi/" + id.toString());
 
         request.subscribe((response: Response) => {
-            this.establishment = response.json().map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
+            var x = response.json();//.map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
+            this.establishment = x;
         }, (error) => alert("Error: " + JSON.stringify(error)));
     }
 

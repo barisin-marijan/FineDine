@@ -9,27 +9,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("angular2/core");
 var browser_1 = require('angular2/platform/browser');
+var http_1 = require('angular2/http');
 var Establishment_1 = require("./../Model/Establishment");
 //import {TodoItem} from "./Model/TodoItem"
 //import {TodoInput} from "./Components/TodoInput"
 //import {TodoProgress} from "./Components/TodoProgress"
 //import {TodoList} from "./Components/TodoList"
 //import {TodoService} from "./Services/TodoService"
-var http_1 = require('angular2/http');
 var router_1 = require('angular2/router');
 var EstablishmentDetails = (function () {
-    function EstablishmentDetails() {
+    function EstablishmentDetails(http) {
         this.establishment = new Establishment_1.Establishment();
-        this.establishment.Id = Number.parseInt(document.getElementById("establishment-details").getAttribute("dbId"));
+        this.http = http;
+        this.dbId = Number.parseInt(document.getElementById("establishment-details").getAttribute("dbId"));
+        this.fetchEstablishment(this.dbId);
     }
+    EstablishmentDetails.prototype.fetchEstablishment = function (id) {
+        var _this = this;
+        var request = this.http.request("/api/EstablishmentsApi/" + id.toString());
+        request.subscribe(function (response) {
+            var x = response.json(); //.map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
+            _this.establishment = x;
+        }, function (error) { return alert("Error: " + JSON.stringify(error)); });
+    };
     EstablishmentDetails = __decorate([
         core_1.Component({
             selector: 'establishment-details'
         }),
         core_1.View({
-            template: "\n        <div class=\"well\">\n            <h4>Additional information:</h4>\n            <div class=\"finedine-text\">\n                Category: @Html.DisplayFor(model => model.Category.Name)\n                <br />\n                Adress: @Html.DisplayFor(model => model.Address)\n                <br />\n                City: @Html.DisplayFor(model => model.Location.PostCode) @Html.DisplayFor(model => model.Location.City)\n                <br/>\n                Phone number: @Html.DisplayFor(model => model.PhoneNumber)\n                <br/>\n                Owner: @Html.DisplayFor(model => model.Owner.UserName)\n                <br />\n                Working hours: @Html.DisplayFor(model => model.WorkingHours)\n                <div class=\"center-align\" style=\"padding-top:5px;\">\n                    <br/>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star-empty\"></span>\n                    <p class=\"main-rating\"> @Html.DisplayFor(model => model.MainRating) / 5.0 </p>\n                </div>\n            </div>\n        </div>\n"
+            template: "\n        <div class=\"well\">\n            <h4>Additional information:</h4>\n            <div class=\"finedine-text\">\n                Category: {{establishment.CategoryName}}\n                <br />\n                Address: {{establishment.Address}}\n                <br />\n                City: {{establishment.PostalCode}} {{establishment.City}}\n                <br/>\n                Phone number: {{establishment.PhoneNumber}}\n                <br/>\n                Owner: {{establishment.Owner}}\n                <br />\n                Working hours: {{establishment.WorkingHours}}\n                <div class=\"center-align\" style=\"padding-top:5px;\">\n                    <br/>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star-empty\"></span>\n                    <p class=\"main-rating\"> {{establishment.MainRating}} / 5.0 </p>\n                </div>\n            </div>\n        </div>\n"
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], EstablishmentDetails);
     return EstablishmentDetails;
 })();

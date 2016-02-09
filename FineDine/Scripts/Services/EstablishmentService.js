@@ -1,4 +1,4 @@
-﻿/*import {Establishment} from "./../Model/Establishment"
+/*import {Establishment} from "./../Model/Establishment"
 import {Http, HTTP_PROVIDERS, Response, RequestOptions, Headers} from 'angular2/http';
 import {Injectable} from 'angular2/core'
 
@@ -111,4 +111,5 @@ export class EstablishmentService {
         return opts;
     }
 }
-*/
+*/ 
+//# sourceMappingURL=EstablishmentService.js.map
