@@ -4,6 +4,14 @@
     ViewBag.Title = "Details";
 }
 
+<script>
+    System.defaultJSExtensions = true;
+    System.config({
+        baseURL: '/Scripts/node_modules/'
+    });
+    System.import("/Scripts/App/app");
+</script>
+
 <div class="container" style="padding: 0 15px 50px 15px">
     <div class="col-md-8">
         <h1 class="page-header">
@@ -84,7 +92,7 @@
 </div>
     <!-- Blog Sidebar Widgets Column -->
     <div class="col-md-4" style="margin-top:150px;">
-        <!-- Side Widget Well -->
+        <!-- Side Widget Well 
         <div class="well">
             <h4>Additional information:</h4>
             <p class="finedine-text">
@@ -109,6 +117,7 @@
                     <p class="main-rating"> @Html.DisplayFor(model => model.MainRating) / 5.0 </p>
                 </div>
             </p>
-        </div>
-    </div>
+        </div> -->
+    <establishment-details id="establishment-details">Loading</establishment-details>
+    </div> 
 </div>
