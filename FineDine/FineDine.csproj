@@ -1323,6 +1323,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Model\Establishment.ts" />
     <TypeScriptCompile Include="Scripts\node_modules\angular2\animate.d.ts" />
     <TypeScriptCompile Include="Scripts\node_modules\angular2\animate\testing.d.ts" />
     <TypeScriptCompile Include="Scripts\node_modules\angular2\bootstrap.d.ts" />
@@ -1945,6 +1946,7 @@
     <TypeScriptCompile Include="Scripts\node_modules\rxjs\util\throwError.d.ts" />
     <TypeScriptCompile Include="Scripts\node_modules\rxjs\util\tryCatch.d.ts" />
     <TypeScriptCompile Include="Scripts\node_modules\rxjs\util\tryOrOnError.d.ts" />
+    <TypeScriptCompile Include="Scripts\Services\EstablishmentService.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("angular2/core");
 var browser_1 = require('angular2/platform/browser');
+var Establishment_1 = require("./../Model/Establishment");
 //import {TodoItem} from "./Model/TodoItem"
 //import {TodoInput} from "./Components/TodoInput"
 //import {TodoProgress} from "./Components/TodoProgress"
@@ -16,11 +17,12 @@ var browser_1 = require('angular2/platform/browser');
 //import {TodoService} from "./Services/TodoService"
 var http_1 = require('angular2/http');
 var router_1 = require('angular2/router');
-var TodoApp = (function () {
-    function TodoApp() {
-        this.jozo = 0;
+var EstablishmentDetails = (function () {
+    function EstablishmentDetails() {
+        this.establishment = new Establishment_1.Establishment();
+        this.establishment.Id = Number.parseInt(document.getElementById("establishment-details").getAttribute("dbId"));
     }
-    TodoApp = __decorate([
+    EstablishmentDetails = __decorate([
         core_1.Component({
             selector: 'establishment-details'
         }),
@@ -28,9 +30,9 @@ var TodoApp = (function () {
             template: "\n        <div class=\"well\">\n            <h4>Additional information:</h4>\n            <div class=\"finedine-text\">\n                Category: @Html.DisplayFor(model => model.Category.Name)\n                <br />\n                Adress: @Html.DisplayFor(model => model.Address)\n                <br />\n                City: @Html.DisplayFor(model => model.Location.PostCode) @Html.DisplayFor(model => model.Location.City)\n                <br/>\n                Phone number: @Html.DisplayFor(model => model.PhoneNumber)\n                <br/>\n                Owner: @Html.DisplayFor(model => model.Owner.UserName)\n                <br />\n                Working hours: @Html.DisplayFor(model => model.WorkingHours)\n                <div class=\"center-align\" style=\"padding-top:5px;\">\n                    <br/>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star-empty\"></span>\n                    <p class=\"main-rating\"> @Html.DisplayFor(model => model.MainRating) / 5.0 </p>\n                </div>\n            </div>\n        </div>\n"
         }), 
         __metadata('design:paramtypes', [])
-    ], TodoApp);
-    return TodoApp;
+    ], EstablishmentDetails);
+    return EstablishmentDetails;
 })();
-exports.TodoApp = TodoApp;
-browser_1.bootstrap(TodoApp, [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS]);
+exports.EstablishmentDetails = EstablishmentDetails;
+browser_1.bootstrap(EstablishmentDetails, [router_1.ROUTER_PROVIDERS, http_1.HTTP_PROVIDERS]);
 //# sourceMappingURL=app.js.map

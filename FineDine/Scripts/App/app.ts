@@ -1,6 +1,9 @@
 ﻿import {Component, View} from "angular2/core"
 import {bootstrap}    from 'angular2/platform/browser'
 
+import {Http, HTTP_PROVIDERS, Response, RequestOptions, Headers} from 'angular2/http';
+
+import {Establishment} from "./../Model/Establishment"
 //import {TodoItem} from "./Model/TodoItem"
 //import {TodoInput} from "./Components/TodoInput"
 //import {TodoProgress} from "./Components/TodoProgress"
@@ -12,7 +15,7 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
 
 @Component({
     selector: 'establishment-details'
-                
+                    
 })
 @View({
         template: `
@@ -43,9 +46,27 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
         </div>
 `
 })
-export class TodoApp {
-    private jozo: number = 0;
+export class EstablishmentDetails {
+    private establishment: Establishment = new Establishment();
+    private http: Http;
+
+    constructor(http: Http)
+    {
+        this.http = http;
+        this.establishment.Id = Number.parseInt(document.getElementById("establishment-details").getAttribute("dbId"));
+        this.fetchEstablishment(this.establishment.Id);
+    }
+
+    public fetchEstablishment(id: number): void
+    {
+        let request = this.http.request("/api/Establishment/" + id.toString());
+
+        request.subscribe((response: Response) => {
+            this.establishment = response.json().map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
+        }, (error) => alert("Error: " + JSON.stringify(error)));
+    }
+
 }
 
-bootstrap(TodoApp, [ROUTER_PROVIDERS, HTTP_PROVIDERS]);
+bootstrap(EstablishmentDetails, [ROUTER_PROVIDERS, HTTP_PROVIDERS]);
 
