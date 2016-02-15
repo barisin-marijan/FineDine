@@ -71,8 +71,11 @@ namespace FineDine.Controllers
 
         // PUT: api/EstablishmentsApi/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutEstablishment(int id, Establishment establishment)
+        public IHttpActionResult PutEstablishment(int id, tempEstablishment establishment)
         {
+            Establishment newEstablishment = new Establishment();
+            //tempEstablishment est = Json.
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -82,26 +85,73 @@ namespace FineDine.Controllers
             {
                 return BadRequest();
             }
-
-            db.Entry(establishment).State = EntityState.Modified;
-
-            try
+            else
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EstablishmentExists(id))
+                var temp = from estbl in db.Establishments
+                                   where estbl.Id == id
+                                   select estbl;
+                newEstablishment = temp.Single();
+                
+
+                var locationList = db.Locations.ToList();
+                bool locationFlag = true;
+
+                Location newLocation = new Location() { City = establishment.City, PostCode = establishment.PostalCode, Country = newEstablishment.Location.Country };
+
+                foreach (var location in locationList)
                 {
-                    return NotFound();
+                    if (location.Country == newEstablishment.Location.Country && location.City == establishment.City && location.PostCode == establishment.PostalCode)
+                    {
+                        newLocation = location;
+                        locationFlag = false;
+                    }
                 }
-                else
+
+                if (locationFlag)
+                    db.Locations.Add(newLocation);
+
+                newEstablishment.Location = newLocation;
+
+                newEstablishment.Address = establishment.Address;
+
+                var categoriesList = db.Categories.ToList();
+                if (establishment.CategoryName == "Restaurant")
+                    newEstablishment.Category = categoriesList[0];
+                else if (establishment.CategoryName == "Fast Food")
+                    newEstablishment.Category = categoriesList[1];
+                else if (establishment.CategoryName == "Bar")
+                    newEstablishment.Category = categoriesList[2];
+                else if (establishment.CategoryName == "Coffee Shop")
+                    newEstablishment.Category = categoriesList[3];
+
+                newEstablishment.PhoneNumber = establishment.PhoneNumber;
+                newEstablishment.WorkingHours = establishment.WorkingHours;
+
+                db.Entry(newEstablishment).State = EntityState.Modified;
+
+                try
                 {
-                    throw;
+                    db.SaveChanges();
+                    return Ok();
                 }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EstablishmentExists(id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+            //db.Entry(establishment).State = EntityState.Modified;
+
+            
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+//            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/EstablishmentsApi

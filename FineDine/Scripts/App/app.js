@@ -21,9 +21,11 @@ var router_1 = require('angular2/router');
 var EstablishmentDetails = (function () {
     function EstablishmentDetails(http) {
         this.establishment = new Establishment_1.Establishment();
+        this.editedEstablishment = new Establishment_1.Establishment();
         this.http = http;
         this.dbId = Number.parseInt(document.getElementById("establishment-details").getAttribute("dbId"));
         this.fetchEstablishment(this.dbId);
+        this.editFlag = false;
     }
     EstablishmentDetails.prototype.fetchEstablishment = function (id) {
         var _this = this;
@@ -31,13 +33,69 @@ var EstablishmentDetails = (function () {
         request.subscribe(function (response) {
             var x = response.json(); //.map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
             _this.establishment = x;
+            _this.editedEstablishment = x;
         }, function (error) { return alert("Error: " + JSON.stringify(error)); });
+    };
+    EstablishmentDetails.prototype.handleEditButtonClick = function () {
+        this.editFlag = true;
+        //        alert(this.editFlag);
+    };
+    EstablishmentDetails.prototype.handleCategoryChange = function (value) {
+        if (value == 1)
+            this.editedEstablishment.CategoryName = "Restaurant";
+        else if (value == 2)
+            this.editedEstablishment.CategoryName = "Fast Food";
+        else if (value == 3)
+            this.editedEstablishment.CategoryName = "Bar";
+        else if (value == 4)
+            this.editedEstablishment.CategoryName = "Coffee Shop";
+        //alert(value);
+    };
+    EstablishmentDetails.prototype.handleAddressChange = function (value) {
+        this.editedEstablishment.Address = value;
+        //alert(value);
+    };
+    EstablishmentDetails.prototype.handleCityChange = function (value) {
+        this.editedEstablishment.City = value;
+        //alert(value);
+    };
+    EstablishmentDetails.prototype.handlePostalCodeChange = function (value) {
+        this.editedEstablishment.PostalCode = value;
+        //alert(value);
+    };
+    EstablishmentDetails.prototype.handlePhoneChange = function (value) {
+        this.editedEstablishment.PhoneNumber = value;
+        //alert(value);
+    };
+    EstablishmentDetails.prototype.handleWHChange = function (value) {
+        this.editedEstablishment.WorkingHours = value;
+    };
+    EstablishmentDetails.prototype.handleDoneButton = function () {
+        var _this = this;
+        /*let request = this.http.put("/api/EstablishmentsApi/" + this.dbId.toString(), JSON.stringify(this.editedEstablishment));
+        
+        request.subscribe((response: Response) => {
+            var x = response.json();//.map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
+            if (response.status == 200) {
+                this.fetchEstablishment(this.dbId);
+                this.editFlag = false;
+            }
+        }, (error) => alert("Error: " + JSON.stringify(error)));*/
+        this.http.put("/api/EstablishmentsApi/" + this.dbId, JSON.stringify(this.editedEstablishment), this.getJsonRequestOptions()).subscribe(function (response) { if (response.status == 200)
+            _this.editFlag = false; }, function (error) { return alert("Error: " + JSON.stringify(error)); });
+    };
+    EstablishmentDetails.prototype.getJsonRequestOptions = function () {
+        var headers = new http_1.Headers();
+        headers.append("Content-Type", "application/json");
+        var opts = new http_1.RequestOptions();
+        opts.headers = headers;
+        return opts;
     };
     EstablishmentDetails = __decorate([
         core_1.Component({
             selector: 'establishment-details',
             directives: [common_1.NgIf],
-            template: "\n        <div class=\"well\">\n            <h4>Additional information:</h4>\n            <div class=\"finedine-text\">\n                Category: {{establishment.CategoryName}}\n                <br />\n                Address: {{establishment.Address}}\n                <br />\n                City: {{establishment.PostalCode}} {{establishment.City}}\n                <br/>\n                Phone number: {{establishment.PhoneNumber}}\n                <br/>\n                Owner: {{establishment.Owner}}\n                <br />\n                Working hours: {{establishment.WorkingHours}}\n                <div class=\"center-align\" style=\"padding-top:5px;\">\n                    <br/>\n                    <span *ngIf=\"establishment.MainRating > 0.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 1.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 2.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 3.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 4.5\" class=\"glyphicon glyphicon-star\"></span>\n\n                    <span *ngIf=\"establishment.MainRating < 0.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 1.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 2.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 3.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 4.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <p class=\"main-rating\"> {{establishment.MainRating}} / 5.0 </p>\n                </div>\n            </div>\n        </div>\n"
+            template: "\n        <div class=\"well\">\n            <h4>Additional information: &nbsp; &nbsp;&nbsp;&nbsp;<span *ngIf=\"editFlag == false\" (click)=\"handleEditButtonClick()\" class=\"glyphicon glyphicon-pencil\" style=\"cursor: pointer\"></span></h4>\n            <div class=\"finedine-text\">\n                Category: <span *ngIf=\"editFlag == false\">{{establishment.CategoryName}}</span>\n                            <div *ngIf=\"editFlag == true\"> \n                                <input (click)=\"handleCategoryChange(1)\" type=\"radio\" name=\"category\" value=\"restaurant\" class=\"\"> Restaurant<br />\n                                <input (click)=\"handleCategoryChange(2)\" type=\"radio\" name=\"category\" value=\"fastfood\" class=\"\"> Fast Food<br />\n                                <input (click)=\"handleCategoryChange(3)\" type=\"radio\" name=\"category\" value=\"bar\" class=\"\"> Bar<br />\n                                <input (click)=\"handleCategoryChange(4)\" type=\"radio\" name=\"category\" value=\"coffeeshop\" class=\"\"> Coffee Shop\n                            </div>\n                <br />\n                Address: <span *ngIf=\"editFlag == false\">{{establishment.Address}}</span>\n                           <input #inputAddress (change)=\"handleAddressChange(inputAddress.value)\" type=\"text\" value=\"{{establishment.Address}}\" *ngIf=\"editFlag == true\">\n                <br />\n                City: <span *ngIf=\"editFlag == false\">{{establishment.PostalCode}} {{establishment.City}}</span>\n                        <input #inputCity (change)=\"handleCityChange(inputCity.value)\" type=\"text\" value=\"{{establishment.City}}\" *ngIf=\"editFlag == true\">\n                <br *ngIf=\"editFlag == true\" />\n                <span *ngIf=\"editFlag == true\">Postal Code</span>\n                        <input #inputPostalCode (change)=\"handlePostalCodeChange(inputPostalCode.value)\" type=\"text\" value=\"{{establishment.PostalCode}}\" *ngIf=\"editFlag == true\">\n                <br/>\n                Phone number: <span *ngIf=\"editFlag == false\">{{establishment.PhoneNumber}}</span>\n                                <input #inputPhone (change)=\"handlePhoneChange(inputPhone.value)\" type=\"text\" value=\"{{establishment.PhoneNumber}}\" *ngIf=\"editFlag == true\">\n                <br/>\n                Owner: {{establishment.Owner}}\n                <br />\n                Working hours: <span *ngIf=\"editFlag == false\">{{establishment.WorkingHours}}</span>\n                                <input #inputWH (change)=\"handleWHChange(inputWH.value)\" type=\"text\" value=\"{{establishment.WorkingHours}}\" *ngIf=\"editFlag == true\">\n                                <br/><br/><button (click)=\"handleDoneButton()\" *ngIf=\"editFlag == true\">Done</button>\n                \n                <div class=\"center-align\" style=\"padding-top:5px;\">\n                    <br/>\n                    <span *ngIf=\"establishment.MainRating > 0.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 1.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 2.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 3.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 4.5\" class=\"glyphicon glyphicon-star\"></span>\n\n                    <span *ngIf=\"establishment.MainRating < 0.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 1.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 2.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 3.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 4.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <p class=\"main-rating\"> {{establishment.MainRating}} / 5.0 </p>\n                </div>\n            </div>\n        </div>\n"
         }), 
         __metadata('design:paramtypes', [http_1.Http])
     ], EstablishmentDetails);

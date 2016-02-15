@@ -260,6 +260,7 @@
     <Content Include="img\dog.png" />
     <Content Include="img\intro-bg.jpg" />
     <Content Include="img\ipad.png" />
+    <Content Include="img\pen.png" />
     <Content Include="img\phones.png" />
     <Content Include="img\restaurant_icon.jpg" />
     <Content Include="img\welcome.jpg" />
@@ -955,7 +956,9 @@
     <Content Include="Scripts\node_modules\rxjs\util\tryOrOnError.js" />
     <Content Include="Scripts\node_modules\systemjs\system.src.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
