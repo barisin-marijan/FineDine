@@ -1,5 +1,6 @@
 ﻿import {Component, View} from "angular2/core"
 import {bootstrap}    from 'angular2/platform/browser'
+import {NgClass, NgIf} from 'angular2/common';
 
 import {Http, HTTP_PROVIDERS, Response, RequestOptions, Headers} from 'angular2/http';
 
@@ -14,10 +15,10 @@ import {Establishment} from "./../Model/Establishment"
 import {ROUTER_PROVIDERS} from 'angular2/router';
 
 @Component({
-    selector: 'establishment-details'
+    selector: 'establishment-details',
+    directives: [NgIf],
                     
-})
-@View({
+
         template: `
         <div class="well">
             <h4>Additional information:</h4>
@@ -35,11 +36,17 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
                 Working hours: {{establishment.WorkingHours}}
                 <div class="center-align" style="padding-top:5px;">
                     <br/>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star-empty"></span>
+                    <span *ngIf="establishment.MainRating > 0.5" class="glyphicon glyphicon-star"></span>
+                    <span *ngIf="establishment.MainRating > 1.5" class="glyphicon glyphicon-star"></span>
+                    <span *ngIf="establishment.MainRating > 2.5" class="glyphicon glyphicon-star"></span>
+                    <span *ngIf="establishment.MainRating > 3.5" class="glyphicon glyphicon-star"></span>
+                    <span *ngIf="establishment.MainRating > 4.5" class="glyphicon glyphicon-star"></span>
+
+                    <span *ngIf="establishment.MainRating < 0.5" class="glyphicon glyphicon-star-empty"></span>
+                    <span *ngIf="establishment.MainRating < 1.5" class="glyphicon glyphicon-star-empty"></span>
+                    <span *ngIf="establishment.MainRating < 2.5" class="glyphicon glyphicon-star-empty"></span>
+                    <span *ngIf="establishment.MainRating < 3.5" class="glyphicon glyphicon-star-empty"></span>
+                    <span *ngIf="establishment.MainRating < 4.5" class="glyphicon glyphicon-star-empty"></span>
                     <p class="main-rating"> {{establishment.MainRating}} / 5.0 </p>
                 </div>
             </div>

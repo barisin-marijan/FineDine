@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("angular2/core");
 var browser_1 = require('angular2/platform/browser');
+var common_1 = require('angular2/common');
 var http_1 = require('angular2/http');
 var Establishment_1 = require("./../Model/Establishment");
 //import {TodoItem} from "./Model/TodoItem"
@@ -34,10 +35,9 @@ var EstablishmentDetails = (function () {
     };
     EstablishmentDetails = __decorate([
         core_1.Component({
-            selector: 'establishment-details'
-        }),
-        core_1.View({
-            template: "\n        <div class=\"well\">\n            <h4>Additional information:</h4>\n            <div class=\"finedine-text\">\n                Category: {{establishment.CategoryName}}\n                <br />\n                Address: {{establishment.Address}}\n                <br />\n                City: {{establishment.PostalCode}} {{establishment.City}}\n                <br/>\n                Phone number: {{establishment.PhoneNumber}}\n                <br/>\n                Owner: {{establishment.Owner}}\n                <br />\n                Working hours: {{establishment.WorkingHours}}\n                <div class=\"center-align\" style=\"padding-top:5px;\">\n                    <br/>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star\"></span>\n                    <span class=\"glyphicon glyphicon-star-empty\"></span>\n                    <p class=\"main-rating\"> {{establishment.MainRating}} / 5.0 </p>\n                </div>\n            </div>\n        </div>\n"
+            selector: 'establishment-details',
+            directives: [common_1.NgIf],
+            template: "\n        <div class=\"well\">\n            <h4>Additional information:</h4>\n            <div class=\"finedine-text\">\n                Category: {{establishment.CategoryName}}\n                <br />\n                Address: {{establishment.Address}}\n                <br />\n                City: {{establishment.PostalCode}} {{establishment.City}}\n                <br/>\n                Phone number: {{establishment.PhoneNumber}}\n                <br/>\n                Owner: {{establishment.Owner}}\n                <br />\n                Working hours: {{establishment.WorkingHours}}\n                <div class=\"center-align\" style=\"padding-top:5px;\">\n                    <br/>\n                    <span *ngIf=\"establishment.MainRating > 0.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 1.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 2.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 3.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 4.5\" class=\"glyphicon glyphicon-star\"></span>\n\n                    <span *ngIf=\"establishment.MainRating < 0.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 1.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 2.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 3.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 4.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <p class=\"main-rating\"> {{establishment.MainRating}} / 5.0 </p>\n                </div>\n            </div>\n        </div>\n"
         }), 
         __metadata('design:paramtypes', [http_1.Http])
     ], EstablishmentDetails);
