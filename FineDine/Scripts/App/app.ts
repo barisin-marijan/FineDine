@@ -21,7 +21,7 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
 
         template: `
         <div class="well">
-            <h4>Additional information: &nbsp; &nbsp;&nbsp;&nbsp;<span *ngIf="editFlag == false" (click)="handleEditButtonClick()" class="glyphicon glyphicon-pencil" style="cursor: pointer"></span></h4>
+            <h4>Additional information: &nbsp; &nbsp;&nbsp;&nbsp;<span *ngIf="editFlag == false && usersMatch == true" (click)="handleEditButtonClick()" class="glyphicon glyphicon-pencil" style="cursor: pointer"></span></h4>
             <div class="finedine-text">
                 Category: <span *ngIf="editFlag == false">{{establishment.CategoryName}}</span>
                             <div *ngIf="editFlag == true"> 
@@ -74,6 +74,7 @@ export class EstablishmentDetails {
     dbId: number;
     editFlag: boolean;
     public editedEstablishment: Establishment = new Establishment();
+    public usersMatch: boolean;
 
     constructor(http: Http)
     {
@@ -81,6 +82,9 @@ export class EstablishmentDetails {
         this.dbId = Number.parseInt(document.getElementById("establishment-details").getAttribute("dbId"));
         this.fetchEstablishment(this.dbId);
         this.editFlag = false;
+        this.usersMatch = false;
+        //setTimeout(this.usersMatch = this.checkIfUsersMatch(), 3000);
+        this.usersMatch = this.checkIfUsersMatch();
     }
 
     public fetchEstablishment(id: number): void
@@ -92,6 +96,8 @@ export class EstablishmentDetails {
             this.establishment = x;
             this.editedEstablishment = x;
         }, (error) => alert("Error: " + JSON.stringify(error)));
+
+        //this.usersMatch = this.checkIfUsersMatch();
     }
 
     public handleEditButtonClick(): void {
@@ -159,6 +165,29 @@ export class EstablishmentDetails {
         opts.headers = headers;
 
         return opts;
+    }
+
+    public checkIfUsersMatch(): boolean {
+        var x: string;
+        this.http.get(
+            "/api/ServicesApi/GetService/" + "2217d982-1276-430d-b8d8-cdb83c4b3d9c",            
+            this.getJsonRequestOptions()
+        ).subscribe(
+            (response: Response) => { x = response.statusText; },
+            (error) => alert("Error: " + JSON.stringify(error))
+        );
+
+        alert(x);
+        return true;
+
+        /*
+        let request = this.http.request("/api/ServicesApi/" + id.toString());
+
+        request.subscribe((response: Response) => {
+            var x = response.json();
+            this.establishment = x;
+            this.editedEstablishment = x;
+        }, (error) => alert("Error: " + JSON.stringify(error)));*/
     }
 }
 

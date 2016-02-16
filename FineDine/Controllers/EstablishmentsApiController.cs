@@ -144,11 +144,7 @@ namespace FineDine.Controllers
                     {
                         throw;
                     }
-                }
-
-            //db.Entry(establishment).State = EntityState.Modified;
-
-            
+                }            
             }
 
 //            return StatusCode(HttpStatusCode.NoContent);
