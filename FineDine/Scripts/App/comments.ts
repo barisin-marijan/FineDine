@@ -42,8 +42,12 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
                         {{comment.Content}}<br />
                     </div>
               </div>
-            <div class="media links">
-                    Add new comment...
+            <br />
+            <div class="media links" *ngIf="usersMatch==true">
+                    Add new comment...<br /><br />
+                    <span id="commentContent">Comment: <input #commentContent (change)="handleCommentChange(commentContent.value)" type="text" placeholder="Add new Comment"></span><br /><br />
+                    <span id="commentRating">Rating: <input #commentRating (change)="handleRatingChange(commentRating.value)" type="number" min="1" max="5" step="0.5"></span><br /><br />
+                    <button (click)="handleSubmitButton()">Submit</button>
             </div>
 `
 })
@@ -56,6 +60,9 @@ export class CommentsList {
     editFlag: boolean;
     public editedEstablishment: Establishment = new Establishment();
     public usersMatch: boolean;
+    public dbUsername: string;
+
+    public newComment: Comment = new Comment();
 
     constructor(http: Http, http2: Http)
     {
@@ -63,8 +70,10 @@ export class CommentsList {
         this.http2 = http2;
         this.comments = [];
         this.dbId = Number.parseInt(document.getElementById("comments-list").getAttribute("dbId"));
+        this.dbUsername = document.getElementById("comments-list").getAttribute("dbUsername");
         this.fetchComments(this.dbId);        
         this.usersMatch = false;
+        this.checkIfUsersMatch2();
         //setTimeout(this.usersMatch = this.checkIfUsersMatch(), 3000);
         //this.usersMatch = this.checkIfUsersMatch();
     }
@@ -141,21 +150,40 @@ export class CommentsList {
     }
 
     public checkIfUsersMatch2(): void {
-        /*let request = this.http2.request("/api/ServicesApi/GetService/" + "bad-romance", this.getJsonRequestOptions()).subscribe((response: Response) => {
-            if (response.status == 200) {
+        let request = this.http2.post("/api/ServicesApi/GetService/", JSON.stringify({ un: this.dbUsername }), this.getJsonRequestOptions()).subscribe((response: Response) => {
+            if (response.status == 202) {
                 this.usersMatch = true;                
             }          
             
 
+        }, (error) => alert("Error: " + JSON.stringify(error)));        
+    }
+
+    public handleCommentChange(commentContent: string): void {
+        this.newComment.Content = commentContent;
+    }
+
+    public handleRatingChange(commentRating: number): void {
+        this.newComment.Rating = commentRating;
+    }
+
+    public handleSubmitButton(): void {
+        this.newComment.Author = "bad-romance";
+        this.newComment.EstablishmentId = this.dbId;
+        this.newComment.Date = "poker-face"
+
+        let request = this.http.post("/api/CommentsApi/", JSON.stringify(this.newComment), this.getJsonRequestOptions());
+
+        request.subscribe((response: Response) => {
+            if (response.status == 201)
+                this.fetchComments(this.dbId);
         }, (error) => alert("Error: " + JSON.stringify(error)));
 
-        let request = this.http2.post("/api/ServicesApi/GetService/", JSON.stringify({ un: this.establishment.Owner }), this.getJsonRequestOptions()).subscribe((response: Response) => {
-            if (response.status == 200) {
-                this.usersMatch = true;                
-            }          
-            
+        document.getElementById("commentContent").innerHTML = 'Comment: <input #commentContent (change)="handleCommentChange(commentContent.value)" type="text" placeholder="Add new Comment">';
+        document.getElementById("commentRating").innerHTML = 'Rating: <input #commentRating(change) = "handleRatingChange(commentRating.value)" type= "number" min= "1" max= "5" step= "0.5" >';
+        
 
-        }, (error) => alert("Error: " + JSON.stringify(error)));*/
+        
         
     }
 }

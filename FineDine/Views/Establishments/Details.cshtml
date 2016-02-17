@@ -60,7 +60,7 @@
 
     <!-- COMMENTS inace se generiraju iz baze, ali za sada su hardcodirani-->
                 <h3>Users' comments:</h3>
-                <comments-list id="comments-list" dbId="@Html.DisplayFor(model => model.Id)">Comments...</comments-list>
+                <comments-list id="comments-list" dbId="@Html.DisplayFor(model => model.Id)" dbUsername="@Html.DisplayFor(model=>model.Owner.UserName)">Comments...</comments-list>
 
 
             </div>
