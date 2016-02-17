@@ -71,20 +71,24 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
 export class EstablishmentDetails {
     public establishment: Establishment = new Establishment();
     private http: Http;
+    private http2: Http;
+    
     dbId: number;
     editFlag: boolean;
     public editedEstablishment: Establishment = new Establishment();
     public usersMatch: boolean;
 
-    constructor(http: Http)
+    constructor(http: Http, http2: Http)
     {
         this.http = http;
+        this.http2 = http2;
+        
         this.dbId = Number.parseInt(document.getElementById("establishment-details").getAttribute("dbId"));
         this.fetchEstablishment(this.dbId);
         this.editFlag = false;
         this.usersMatch = false;
         //setTimeout(this.usersMatch = this.checkIfUsersMatch(), 3000);
-        this.usersMatch = this.checkIfUsersMatch();
+        //this.usersMatch = this.checkIfUsersMatch();
     }
 
     public fetchEstablishment(id: number): void
@@ -95,9 +99,10 @@ export class EstablishmentDetails {
             var x = response.json();//.map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
             this.establishment = x;
             this.editedEstablishment = x;
+            this.usersMatch = this.checkIfUsersMatch();
         }, (error) => alert("Error: " + JSON.stringify(error)));
 
-        //this.usersMatch = this.checkIfUsersMatch();
+        
     }
 
     public handleEditButtonClick(): void {
@@ -168,17 +173,30 @@ export class EstablishmentDetails {
     }
 
     public checkIfUsersMatch(): boolean {
-        var x: string;
-        this.http.get(
+        var x: boolean = false;
+        //var x: number;
+        /*this.http.get(
             "/api/ServicesApi/GetService/" + "2217d982-1276-430d-b8d8-cdb83c4b3d9c",            
             this.getJsonRequestOptions()
         ).subscribe(
-            (response: Response) => { x = response.statusText; },
+            (response: Response) => { x = response.status },
             (error) => alert("Error: " + JSON.stringify(error))
-        );
+        );*/
 
-        alert(x);
+        let request = this.http2.request("/api/ServicesApi/GetService/2217d982-1276-430d-b8d8-cdb83c4b3d9c", this.getJsonRequestOptions()).subscribe((response: Response) => {
+            if (response.status == 200) x = true;
+            
+
+        }, (error) => alert("Error: " + JSON.stringify(error)));
+
         return true;
+        /*request.subscribe((response: Response) => {
+            x = response.status;
+        
+        }, (error) => alert("Error: " + JSON.stringify(error)));*/
+
+        
+        
 
         /*
         let request = this.http.request("/api/ServicesApi/" + id.toString());

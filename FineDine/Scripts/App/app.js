@@ -19,10 +19,11 @@ var Establishment_1 = require("./../Model/Establishment");
 //import {TodoService} from "./Services/TodoService"
 var router_1 = require('angular2/router');
 var EstablishmentDetails = (function () {
-    function EstablishmentDetails(http) {
+    function EstablishmentDetails(http, http2) {
         this.establishment = new Establishment_1.Establishment();
         this.editedEstablishment = new Establishment_1.Establishment();
         this.http = http;
+        this.http2 = http2;
         this.dbId = Number.parseInt(document.getElementById("establishment-details").getAttribute("dbId"));
         this.fetchEstablishment(this.dbId);
         this.editFlag = false;
@@ -37,8 +38,8 @@ var EstablishmentDetails = (function () {
             var x = response.json(); //.map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
             _this.establishment = x;
             _this.editedEstablishment = x;
+            _this.usersMatch = _this.checkIfUsersMatch();
         }, function (error) { return alert("Error: " + JSON.stringify(error)); });
-        //this.usersMatch = this.checkIfUsersMatch();
     };
     EstablishmentDetails.prototype.handleEditButtonClick = function () {
         this.editFlag = true;
@@ -96,10 +97,24 @@ var EstablishmentDetails = (function () {
         return opts;
     };
     EstablishmentDetails.prototype.checkIfUsersMatch = function () {
-        var x;
-        this.http.get("/api/ServicesApi/GetService/" + "2217d982-1276-430d-b8d8-cdb83c4b3d9c", this.getJsonRequestOptions()).subscribe(function (response) { x = response.statusText; }, function (error) { return alert("Error: " + JSON.stringify(error)); });
-        alert(x);
+        var x = false;
+        //var x: number;
+        /*this.http.get(
+            "/api/ServicesApi/GetService/" + "2217d982-1276-430d-b8d8-cdb83c4b3d9c",
+            this.getJsonRequestOptions()
+        ).subscribe(
+            (response: Response) => { x = response.status },
+            (error) => alert("Error: " + JSON.stringify(error))
+        );*/
+        var request = this.http2.request("/api/ServicesApi/GetService/2217d982-1276-430d-b8d8-cdb83c4b3d9c", this.getJsonRequestOptions()).subscribe(function (response) {
+            if (response.status == 200)
+                x = true;
+        }, function (error) { return alert("Error: " + JSON.stringify(error)); });
         return true;
+        /*request.subscribe((response: Response) => {
+            x = response.status;
+        
+        }, (error) => alert("Error: " + JSON.stringify(error)));*/
         /*
         let request = this.http.request("/api/ServicesApi/" + id.toString());
 
@@ -113,9 +128,9 @@ var EstablishmentDetails = (function () {
         core_1.Component({
             selector: 'establishment-details',
             directives: [common_1.NgIf],
-            template: "\n        <div class=\"well\">\n            <h4>Additional information: &nbsp; &nbsp;&nbsp;&nbsp;<span *ngIf=\"editFlag == false && checkIfUsersMatch() == true\" (click)=\"handleEditButtonClick()\" class=\"glyphicon glyphicon-pencil\" style=\"cursor: pointer\"></span></h4>\n            <div class=\"finedine-text\">\n                Category: <span *ngIf=\"editFlag == false\">{{establishment.CategoryName}}</span>\n                            <div *ngIf=\"editFlag == true\"> \n                                <input (click)=\"handleCategoryChange(1)\" type=\"radio\" name=\"category\" value=\"restaurant\" class=\"\"> Restaurant<br />\n                                <input (click)=\"handleCategoryChange(2)\" type=\"radio\" name=\"category\" value=\"fastfood\" class=\"\"> Fast Food<br />\n                                <input (click)=\"handleCategoryChange(3)\" type=\"radio\" name=\"category\" value=\"bar\" class=\"\"> Bar<br />\n                                <input (click)=\"handleCategoryChange(4)\" type=\"radio\" name=\"category\" value=\"coffeeshop\" class=\"\"> Coffee Shop\n                            </div>\n                <br />\n                Address: <span *ngIf=\"editFlag == false\">{{establishment.Address}}</span>\n                           <input #inputAddress (change)=\"handleAddressChange(inputAddress.value)\" type=\"text\" value=\"{{establishment.Address}}\" *ngIf=\"editFlag == true\">\n                <br />\n                City: <span *ngIf=\"editFlag == false\">{{establishment.PostalCode}} {{establishment.City}}</span>\n                        <input #inputCity (change)=\"handleCityChange(inputCity.value)\" type=\"text\" value=\"{{establishment.City}}\" *ngIf=\"editFlag == true\">\n                <br *ngIf=\"editFlag == true\" />\n                <span *ngIf=\"editFlag == true\">Postal Code</span>\n                        <input #inputPostalCode (change)=\"handlePostalCodeChange(inputPostalCode.value)\" type=\"text\" value=\"{{establishment.PostalCode}}\" *ngIf=\"editFlag == true\">\n                <br/>\n                Phone number: <span *ngIf=\"editFlag == false\">{{establishment.PhoneNumber}}</span>\n                                <input #inputPhone (change)=\"handlePhoneChange(inputPhone.value)\" type=\"text\" value=\"{{establishment.PhoneNumber}}\" *ngIf=\"editFlag == true\">\n                <br/>\n                Owner: {{establishment.Owner}}\n                <br />\n                Working hours: <span *ngIf=\"editFlag == false\">{{establishment.WorkingHours}}</span>\n                                <input #inputWH (change)=\"handleWHChange(inputWH.value)\" type=\"text\" value=\"{{establishment.WorkingHours}}\" *ngIf=\"editFlag == true\">\n                                <br/><br/><button (click)=\"handleDoneButton()\" *ngIf=\"editFlag == true\">Done</button>\n                \n                <div class=\"center-align\" style=\"padding-top:5px;\">\n                    <br/>\n                    <span *ngIf=\"establishment.MainRating > 0.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 1.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 2.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 3.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 4.5\" class=\"glyphicon glyphicon-star\"></span>\n\n                    <span *ngIf=\"establishment.MainRating < 0.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 1.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 2.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 3.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 4.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <p class=\"main-rating\"> {{establishment.MainRating}} / 5.0 </p>\n                </div>\n            </div>\n        </div>\n"
+            template: "\n        <div class=\"well\">\n            <h4>Additional information: &nbsp; &nbsp;&nbsp;&nbsp;<span *ngIf=\"editFlag == false && usersMatch == true\" (click)=\"handleEditButtonClick()\" class=\"glyphicon glyphicon-pencil\" style=\"cursor: pointer\"></span></h4>\n            <div class=\"finedine-text\">\n                Category: <span *ngIf=\"editFlag == false\">{{establishment.CategoryName}}</span>\n                            <div *ngIf=\"editFlag == true\"> \n                                <input (click)=\"handleCategoryChange(1)\" type=\"radio\" name=\"category\" value=\"restaurant\" class=\"\"> Restaurant<br />\n                                <input (click)=\"handleCategoryChange(2)\" type=\"radio\" name=\"category\" value=\"fastfood\" class=\"\"> Fast Food<br />\n                                <input (click)=\"handleCategoryChange(3)\" type=\"radio\" name=\"category\" value=\"bar\" class=\"\"> Bar<br />\n                                <input (click)=\"handleCategoryChange(4)\" type=\"radio\" name=\"category\" value=\"coffeeshop\" class=\"\"> Coffee Shop\n                            </div>\n                <br />\n                Address: <span *ngIf=\"editFlag == false\">{{establishment.Address}}</span>\n                           <input #inputAddress (change)=\"handleAddressChange(inputAddress.value)\" type=\"text\" value=\"{{establishment.Address}}\" *ngIf=\"editFlag == true\">\n                <br />\n                City: <span *ngIf=\"editFlag == false\">{{establishment.PostalCode}} {{establishment.City}}</span>\n                        <input #inputCity (change)=\"handleCityChange(inputCity.value)\" type=\"text\" value=\"{{establishment.City}}\" *ngIf=\"editFlag == true\">\n                <br *ngIf=\"editFlag == true\" />\n                <span *ngIf=\"editFlag == true\">Postal Code</span>\n                        <input #inputPostalCode (change)=\"handlePostalCodeChange(inputPostalCode.value)\" type=\"text\" value=\"{{establishment.PostalCode}}\" *ngIf=\"editFlag == true\">\n                <br/>\n                Phone number: <span *ngIf=\"editFlag == false\">{{establishment.PhoneNumber}}</span>\n                                <input #inputPhone (change)=\"handlePhoneChange(inputPhone.value)\" type=\"text\" value=\"{{establishment.PhoneNumber}}\" *ngIf=\"editFlag == true\">\n                <br/>\n                Owner: {{establishment.Owner}}\n                <br />\n                Working hours: <span *ngIf=\"editFlag == false\">{{establishment.WorkingHours}}</span>\n                                <input #inputWH (change)=\"handleWHChange(inputWH.value)\" type=\"text\" value=\"{{establishment.WorkingHours}}\" *ngIf=\"editFlag == true\">\n                                <br/><br/><button (click)=\"handleDoneButton()\" *ngIf=\"editFlag == true\">Done</button>\n                \n                <div class=\"center-align\" style=\"padding-top:5px;\">\n                    <br/>\n                    <span *ngIf=\"establishment.MainRating > 0.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 1.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 2.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 3.5\" class=\"glyphicon glyphicon-star\"></span>\n                    <span *ngIf=\"establishment.MainRating > 4.5\" class=\"glyphicon glyphicon-star\"></span>\n\n                    <span *ngIf=\"establishment.MainRating < 0.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 1.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 2.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 3.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <span *ngIf=\"establishment.MainRating < 4.5\" class=\"glyphicon glyphicon-star-empty\"></span>\n                    <p class=\"main-rating\"> {{establishment.MainRating}} / 5.0 </p>\n                </div>\n            </div>\n        </div>\n"
         }), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, http_1.Http])
     ], EstablishmentDetails);
     return EstablishmentDetails;
 })();

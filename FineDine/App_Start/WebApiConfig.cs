@@ -13,8 +13,8 @@ namespace FineDine
 
             config.Routes.MapHttpRoute(
                 name: "ServicesApi",
-                routeTemplate: "api/{controller}/GetService/{userName}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{action}/{userName}",
+                defaults: new {  }
             );
 
             config.Routes.MapHttpRoute(
@@ -23,7 +23,9 @@ namespace FineDine
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            
+            var json = config.Formatters.JsonFormatter;
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
 
 
         }

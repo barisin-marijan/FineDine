@@ -11,10 +11,20 @@ using System.Web.Http.Description;
 
 namespace FineDine.Controllers
 {
+    public class proba
+    {
+        public proba()
+        {
+         number = 0;
+        }
+        public int number { get; set; }
+    }
+
+
     public class ServicesApiController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        
         // GET: api/ServicesApi/5
         [ResponseType(typeof(void))]
         [HttpGet]
@@ -35,8 +45,17 @@ namespace FineDine.Controllers
                 return BadRequest();       */
 
             return Ok();
+            //return StatusCode(HttpStatusCode.NoContent);
+            //return Ok(Json<proba>(new proba()));
             
 
+
+
+        }
+
+        public IQueryable<Establishment> GetEstablishments()
+        {
+            return db.Establishments;
         }
     }
 }
