@@ -1342,6 +1342,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\App\comments.ts" />
+    <TypeScriptCompile Include="Scripts\Model\Comment.ts" />
     <TypeScriptCompile Include="Scripts\Model\Establishment.ts" />
     <TypeScriptCompile Include="Scripts\node_modules\angular2\animate.d.ts" />
     <TypeScriptCompile Include="Scripts\node_modules\angular2\animate\testing.d.ts" />

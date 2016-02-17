@@ -12,27 +12,49 @@ using FineDine.Models;
 
 namespace FineDine.Controllers
 {
+    public class tempComment
+    {
+        public int Id { get; set; }
+        public string Content { get; set; }
+        public int Rating { get; set; }
+        public DateTime Date { get; set; }
+
+        public string Author { get; set; }
+        public int EstablishmentId { get; set; }
+
+        public tempComment(int id, string content, int rating, DateTime date, string author, int establishmentId)
+        {
+            Id = id;
+            Content = content;
+            Rating = rating;
+            Date = date;
+            Author = author;
+            EstablishmentId = establishmentId;
+        }
+
+        public tempComment()
+        {
+            
+        }
+    }
+
     public class CommentsApiController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/CommentsApi
-        public IQueryable<Comment> GetComments()
-        {
-            return db.Comments;
-        }
 
         // GET: api/CommentsApi/5
-        [ResponseType(typeof(Comment))]
-        public IHttpActionResult GetComment(int id)
+        //[ResponseType(typeof(Comment))]
+        public IQueryable<tempComment> GetComment(int id)
         {
-            Comment comment = db.Comments.Find(id);
-            if (comment == null)
-            {
-                return NotFound();
-            }
+            var dbComments = from comment in db.Comments
+                             where comment.Establishment.Id == id
+                             select new tempComment() { Id = comment.Id, Content = comment.Content, Rating = comment.Rating, Date = comment.DateTime, Author = comment.Author.UserName, EstablishmentId = comment.Establishment.Id } ;
 
-            return Ok(comment);
+
+            //IQueryable<tempComment> tempComments = null;
+
+            return dbComments;
         }
 
         // PUT: api/CommentsApi/5

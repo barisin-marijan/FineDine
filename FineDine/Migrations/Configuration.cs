@@ -80,7 +80,15 @@ namespace FineDine.Migrations
              };
 
             Categories.ForEach(cat => context.Categories.Add(cat));
-            */
+            
+
+            var comments = new List<Comment>()
+             {
+                 new Comment() {Content = "Ukusno", Rating = 4, DateTime = DateTime.Today },
+                 new Comment() {Content = "Zagonetno", Rating = 5, DateTime = DateTime.Today }
+             };
+
+            comments.ForEach(c => context.Comments.Add(c));*/
         }
     }
 }

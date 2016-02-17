@@ -10,6 +10,7 @@
         baseURL: '/Scripts/node_modules/'
     });
     System.import("/Scripts/App/app");
+    System.import("/Scripts/App/comments");
 </script>
 
 <div class="container" style="padding: 0 15px 50px 15px">
@@ -59,42 +60,7 @@
 
     <!-- COMMENTS inace se generiraju iz baze, ali za sada su hardcodirani-->
                 <h3>Users' comments:</h3>
-                <div class="media links">
-                    <div class="media-left">
-                        <img class="media-object" src="http://placehold.it/80x80" alt="placeholder">
-                    </div>
-                    <div class="media-body">
-                        <a><h4 class="media-heading">jjozic22</h4></a>
-                        <span class="ratingLabel">Ocjena: </span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span><br />
-                        Odličan restoran, djevojka i ja smo dosta jeftino prošli za meni od tri slijeda.<br />
-                    </div>
-                </div>
-
-                <div class="media links">
-                    <div class="media-left">
-                        <img class="media-object" src="http://placehold.it/80x80" alt="placeholder">
-                    </div>
-                    <div class="media-body">
-                        <a><h4 class="media-heading">mseric65</h4></a>
-                        <span class="ratingLabel">Rating: </span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span><br />
-                        Lokacija odlična, jela imaju dobar omjer cijene i kvalitete. Ocjena manje radi prevelike buke.<br />
-                    </div>
-                    <hr>
-
-                </div>
-                <div class="links" style="text-align:center;">
-                    <a>Load more...</a>
-                </div>
+                <comments-list id="comments-list" dbId="@Html.DisplayFor(model => model.Id)">Comments...</comments-list>
 
 
             </div>
