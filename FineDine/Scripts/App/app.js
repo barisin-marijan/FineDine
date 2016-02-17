@@ -38,7 +38,7 @@ var EstablishmentDetails = (function () {
             var x = response.json(); //.map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
             _this.establishment = x;
             _this.editedEstablishment = x;
-            _this.usersMatch = _this.checkIfUsersMatch();
+            _this.checkIfUsersMatch();
         }, function (error) { return alert("Error: " + JSON.stringify(error)); });
     };
     EstablishmentDetails.prototype.handleEditButtonClick = function () {
@@ -77,15 +77,6 @@ var EstablishmentDetails = (function () {
     };
     EstablishmentDetails.prototype.handleDoneButton = function () {
         var _this = this;
-        /*let request = this.http.put("/api/EstablishmentsApi/" + this.dbId.toString(), JSON.stringify(this.editedEstablishment));
-        
-        request.subscribe((response: Response) => {
-            var x = response.json();//.map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
-            if (response.status == 200) {
-                this.fetchEstablishment(this.dbId);
-                this.editFlag = false;
-            }
-        }, (error) => alert("Error: " + JSON.stringify(error)));*/
         this.http.put("/api/EstablishmentsApi/" + this.dbId, JSON.stringify(this.editedEstablishment), this.getJsonRequestOptions()).subscribe(function (response) { if (response.status == 200)
             _this.editFlag = false; }, function (error) { return alert("Error: " + JSON.stringify(error)); });
     };
@@ -97,32 +88,19 @@ var EstablishmentDetails = (function () {
         return opts;
     };
     EstablishmentDetails.prototype.checkIfUsersMatch = function () {
-        var x = false;
-        //var x: number;
-        /*this.http.get(
-            "/api/ServicesApi/GetService/" + "2217d982-1276-430d-b8d8-cdb83c4b3d9c",
-            this.getJsonRequestOptions()
-        ).subscribe(
-            (response: Response) => { x = response.status },
-            (error) => alert("Error: " + JSON.stringify(error))
-        );*/
-        var request = this.http2.request("/api/ServicesApi/GetService/2217d982-1276-430d-b8d8-cdb83c4b3d9c", this.getJsonRequestOptions()).subscribe(function (response) {
-            if (response.status == 200)
-                x = true;
-        }, function (error) { return alert("Error: " + JSON.stringify(error)); });
-        return true;
-        /*request.subscribe((response: Response) => {
-            x = response.status;
-        
-        }, (error) => alert("Error: " + JSON.stringify(error)));*/
-        /*
-        let request = this.http.request("/api/ServicesApi/" + id.toString());
+        /*let request = this.http2.request("/api/ServicesApi/GetService/" + "bad-romance", this.getJsonRequestOptions()).subscribe((response: Response) => {
+            if (response.status == 200) {
+                this.usersMatch = true;
+            }
+            
 
-        request.subscribe((response: Response) => {
-            var x = response.json();
-            this.establishment = x;
-            this.editedEstablishment = x;
         }, (error) => alert("Error: " + JSON.stringify(error)));*/
+        var _this = this;
+        var request = this.http2.post("/api/ServicesApi/GetService/", JSON.stringify({ un: this.establishment.Owner }), this.getJsonRequestOptions()).subscribe(function (response) {
+            if (response.status == 200) {
+                _this.usersMatch = true;
+            }
+        }, function (error) { return alert("Error: " + JSON.stringify(error)); });
     };
     EstablishmentDetails = __decorate([
         core_1.Component({

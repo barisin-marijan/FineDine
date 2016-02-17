@@ -188,6 +188,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CommentsApiController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\EstablishmentsApiController.cs" />
     <Compile Include="Controllers\EstablishmentsController.cs" />
