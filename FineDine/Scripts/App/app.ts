@@ -5,11 +5,7 @@ import {NgClass, NgIf} from 'angular2/common';
 import {Http, HTTP_PROVIDERS, Response, RequestOptions, Headers} from 'angular2/http';
 
 import {Establishment} from "./../Model/Establishment"
-//import {TodoItem} from "./Model/TodoItem"
-//import {TodoInput} from "./Components/TodoInput"
-//import {TodoProgress} from "./Components/TodoProgress"
-//import {TodoList} from "./Components/TodoList"
-//import {TodoService} from "./Services/TodoService"
+
 
 
 import {ROUTER_PROVIDERS} from 'angular2/router';

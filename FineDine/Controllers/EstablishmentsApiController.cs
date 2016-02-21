@@ -40,6 +40,11 @@ namespace FineDine.Controllers
             City = city;
             Owner = owner;
         }
+
+        public tempEstablishment()
+        {
+
+        }
     }
 
     public class EstablishmentsApiController : ApiController
@@ -47,9 +52,11 @@ namespace FineDine.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/EstablishmentsApi
-        public IQueryable<Establishment> GetEstablishments()
+        public IQueryable<tempEstablishment> GetEstablishments()
         {
-            return db.Establishments;
+            var dbEstablishments = from estbl in db.Establishments select new tempEstablishment() {Id = estbl.Id, Name = estbl.Name, Address = estbl.Address, WorkingHours = estbl.WorkingHours, MainRating = estbl.MainRating, Description = estbl.Description, PhoneNumber = estbl.PhoneNumber, CategoryName = estbl.Category.Name, PostalCode = estbl.Location.PostCode, City = estbl.Location.City, Owner = estbl.Owner.UserName };
+
+            return dbEstablishments;
         }
 
         // GET: api/EstablishmentsApi/5

@@ -4,16 +4,31 @@
     ViewBag.Title = "Index";
 }
 
-<div class="container">
-    <div class="container" style="padding: 50px 15px 50px 15px">
+<script>
+    System.defaultJSExtensions = true;
+    System.config({
+        baseURL: '/Scripts/node_modules/'
+    });
+    System.import("/Scripts/App/search");
+</script>
 
-        <h2>Your establishments</h2>
+<div class="container">
+    <div class="container col-lg-12 col-md-12 col-sm-12" style="padding: 50px 15px 50px 15px">
+
+        <h2>Establishments: </h2>
+        <search-list>Loading...</search-list>
+
+        <!--
+        <br/>
+        <input type="text" class="form-control searchbar" style="width:100%" placeholder="What are you looking for?">
+        <br/>
+        
 
         <p class="links">
             @Html.ActionLink("Create New", "Create")
         </p>
         
-
+        
             @foreach (var item in Model)
             {
                 <div class="media">
@@ -34,7 +49,7 @@
                     </div>
                 </div>
                 <hr/>               
-            }
+            }  -->
 
         <nav class="center-align">
             <ul class="pagination">

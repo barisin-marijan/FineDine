@@ -13,11 +13,6 @@ var common_1 = require('angular2/common');
 var http_1 = require('angular2/http');
 var Establishment_1 = require("./../Model/Establishment");
 var Comment_1 = require("./../Model/Comment");
-//import {TodoItem} from "./Model/TodoItem"
-//import {TodoInput} from "./Components/TodoInput"
-//import {TodoProgress} from "./Components/TodoProgress"
-//import {TodoList} from "./Components/TodoList"
-//import {TodoService} from "./Services/TodoService"
 var router_1 = require('angular2/router');
 var CommentsList = (function () {
     function CommentsList(http, http2) {
