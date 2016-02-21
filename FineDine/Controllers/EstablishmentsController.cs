@@ -58,15 +58,10 @@ namespace FineDine.Controllers
                 var currentUserId = User.Identity.GetUserId();
                 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
                 var currentUser = manager.FindById(User.Identity.GetUserId());
-
-                //while (var tag in establishment.Tags)
-                //{ }
-
-
+                
                 establishment.Owner = currentUser;
                 Tags = " " + Tags;
                 string[] parsedTags = Tags.Split(new char[] { ' ', '#' });
-                //string[] parsedTags = Tags.Split(" #",0);
                 establishment.Tags = new List<Tag>();   
                 var tagsList = db.Tags.ToList();
 

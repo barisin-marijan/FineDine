@@ -12,11 +12,6 @@ var browser_1 = require('angular2/platform/browser');
 var common_1 = require('angular2/common');
 var http_1 = require('angular2/http');
 var Establishment_1 = require("./../Model/Establishment");
-//import {TodoItem} from "./Model/TodoItem"
-//import {TodoInput} from "./Components/TodoInput"
-//import {TodoProgress} from "./Components/TodoProgress"
-//import {TodoList} from "./Components/TodoList"
-//import {TodoService} from "./Services/TodoService"
 var router_1 = require('angular2/router');
 var EstablishmentDetails = (function () {
     function EstablishmentDetails(http, http2) {
@@ -28,14 +23,12 @@ var EstablishmentDetails = (function () {
         this.fetchEstablishment(this.dbId);
         this.editFlag = false;
         this.usersMatch = false;
-        //setTimeout(this.usersMatch = this.checkIfUsersMatch(), 3000);
-        //this.usersMatch = this.checkIfUsersMatch();
     }
     EstablishmentDetails.prototype.fetchEstablishment = function (id) {
         var _this = this;
         var request = this.http.request("/api/EstablishmentsApi/" + id.toString());
         request.subscribe(function (response) {
-            var x = response.json(); //.map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
+            var x = response.json();
             _this.establishment = x;
             _this.editedEstablishment = x;
             _this.checkIfUsersMatch();
@@ -43,7 +36,6 @@ var EstablishmentDetails = (function () {
     };
     EstablishmentDetails.prototype.handleEditButtonClick = function () {
         this.editFlag = true;
-        //        alert(this.editFlag);
     };
     EstablishmentDetails.prototype.handleCategoryChange = function (value) {
         if (value == 1)
@@ -54,23 +46,18 @@ var EstablishmentDetails = (function () {
             this.editedEstablishment.CategoryName = "Bar";
         else if (value == 4)
             this.editedEstablishment.CategoryName = "Coffee Shop";
-        //alert(value);
     };
     EstablishmentDetails.prototype.handleAddressChange = function (value) {
         this.editedEstablishment.Address = value;
-        //alert(value);
     };
     EstablishmentDetails.prototype.handleCityChange = function (value) {
         this.editedEstablishment.City = value;
-        //alert(value);
     };
     EstablishmentDetails.prototype.handlePostalCodeChange = function (value) {
         this.editedEstablishment.PostalCode = value;
-        //alert(value);
     };
     EstablishmentDetails.prototype.handlePhoneChange = function (value) {
         this.editedEstablishment.PhoneNumber = value;
-        //alert(value);
     };
     EstablishmentDetails.prototype.handleWHChange = function (value) {
         this.editedEstablishment.WorkingHours = value;
@@ -88,13 +75,6 @@ var EstablishmentDetails = (function () {
         return opts;
     };
     EstablishmentDetails.prototype.checkIfUsersMatch = function () {
-        /*let request = this.http2.request("/api/ServicesApi/GetService/" + "bad-romance", this.getJsonRequestOptions()).subscribe((response: Response) => {
-            if (response.status == 200) {
-                this.usersMatch = true;
-            }
-            
-
-        }, (error) => alert("Error: " + JSON.stringify(error)));*/
         var _this = this;
         var request = this.http2.post("/api/ServicesApi/GetService/", JSON.stringify({ un: this.establishment.Owner }), this.getJsonRequestOptions()).subscribe(function (response) {
             if (response.status == 200) {

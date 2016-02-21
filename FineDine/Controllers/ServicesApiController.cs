@@ -26,10 +26,6 @@ namespace FineDine.Controllers
         [HttpPost]
         public IHttpActionResult GetService(userNameClass userName)
         {
-            //var currentUserId = User.Identity.GetUserId();
-            //var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-            //var currentUser = manager.FindById(User.Identity.GetUserId());
-
             string id;
             id = User.Identity.GetUserId();
             id = RequestContext.Principal.Identity.GetUserId();
@@ -37,20 +33,13 @@ namespace FineDine.Controllers
             var currentUser = manager.FindById(id);
 
             if (currentUser == null)
-                //return NotFound();
-                //return Ok();
                 return StatusCode(HttpStatusCode.NoContent);
 
             if (currentUser.UserName == userName.un)            
                 return Ok();
             
-            else
-                //return BadRequest();     
-                return StatusCode(HttpStatusCode.Accepted);
-
-            //return Ok();
-            //return StatusCode(HttpStatusCode.NoContent);
-            //return Ok(Json<proba>(new proba()));            
+            else   
+                return StatusCode(HttpStatusCode.Accepted);          
         }
 
        

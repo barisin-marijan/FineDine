@@ -70,8 +70,6 @@ export class CommentsList {
         this.fetchComments(this.dbId);        
         this.usersMatch = false;
         this.checkIfUsersMatch2();
-        //setTimeout(this.usersMatch = this.checkIfUsersMatch(), 3000);
-        //this.usersMatch = this.checkIfUsersMatch();
     }
 
     public fetchComments(id: number): void
@@ -79,9 +77,7 @@ export class CommentsList {
         let request = this.http.request("/api/CommentsApi/" + id.toString());
 
         request.subscribe((response: Response) => {
-            this.comments = response.json().map(cmnt => new Comment(cmnt.Id, cmnt.Content, cmnt.Rating, cmnt.Date, cmnt.Author, cmnt.EstablishmentId));
-            //this.editedEstablishment = x;
-            
+            this.comments = response.json().map(cmnt => new Comment(cmnt.Id, cmnt.Content, cmnt.Rating, cmnt.Date, cmnt.Author, cmnt.EstablishmentId));            
         }, (error) => alert("Error: " + JSON.stringify(error)));
 
         
@@ -89,50 +85,6 @@ export class CommentsList {
 
     public handleEditButtonClick(): void {
         this.editFlag = true;
-//        alert(this.editFlag);
-    }
-
-    public handleCategoryChange(value: number): void {
-        if (value == 1) this.editedEstablishment.CategoryName = "Restaurant";
-        else if (value == 2) this.editedEstablishment.CategoryName = "Fast Food";
-        else if (value == 3) this.editedEstablishment.CategoryName = "Bar";
-        else if (value == 4) this.editedEstablishment.CategoryName = "Coffee Shop";
-        //alert(value);
-    }
-
-    public handleAddressChange(value: string): void {
-        this.editedEstablishment.Address = value;
-        //alert(value);
-    }
-
-    public handleCityChange(value: string): void {
-        this.editedEstablishment.City = value;
-        //alert(value);
-    }
-
-    public handlePostalCodeChange(value: string): void {
-        this.editedEstablishment.PostalCode = value;
-        //alert(value);
-    }
-
-    public handlePhoneChange(value: string): void {
-        this.editedEstablishment.PhoneNumber = value;
-        //alert(value);
-    }
-
-    public handleWHChange(value: string): void {
-        this.editedEstablishment.WorkingHours = value;
-    }
-
-    public handleDoneButton(): void {
-        this.http.put(
-            "/api/EstablishmentsApi/" + this.dbId,
-            JSON.stringify(this.editedEstablishment),
-            this.getJsonRequestOptions()
-        ).subscribe(
-            (response: Response) => { if (response.status == 200) this.editFlag = false; },
-            (error) => alert("Error: " + JSON.stringify(error))
-            );
     }
 
     private getJsonRequestOptions(): RequestOptions {
@@ -177,10 +129,6 @@ export class CommentsList {
 
         document.getElementById("commentContent").innerHTML = 'Comment: <input #commentContent (change)="handleCommentChange(commentContent.value)" type="text" placeholder="Add new Comment">';
         document.getElementById("commentRating").innerHTML = 'Rating: <input #commentRating(change) = "handleRatingChange(commentRating.value)" type= "number" min= "1" max= "5" step= "0.5" >';
-        
-
-        
-        
     }
 }
 

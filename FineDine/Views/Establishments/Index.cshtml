@@ -17,40 +17,6 @@
 
         <h2>Establishments: </h2>
         <search-list>Loading...</search-list>
-
-        <!--
-        <br/>
-        <input type="text" class="form-control searchbar" style="width:100%" placeholder="What are you looking for?">
-        <br/>
-        
-
-        <p class="links">
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        
-        
-            @foreach (var item in Model)
-            {
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="~/img/restaurant_icon.jpg" alt="Restaurant icon">
-                        </a>
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading links">@Html.ActionLink(item.Name, "Details", new { id = item.Id })</h4>
-                        @Html.DisplayFor(modelItem => item.Address)<br/>
-                        Main rating: @Html.DisplayFor(modelItem => item.MainRating)
-                    </div>
-                    <div class="media-right links">
-                        <span>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</span>
-                        <span>@Html.ActionLink("Details", "Details", new { id = item.Id })</span>
-                        <span>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</span>
-                    </div>
-                </div>
-                <hr/>               
-            }  -->
-
         <nav class="center-align">
             <ul class="pagination">
                 <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>

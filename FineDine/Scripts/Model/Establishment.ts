@@ -11,9 +11,8 @@
     public City: string;
     public Owner: string;
 
-    constructor(id: number = -1, name?: string, adress?: string, workinghours?: string, mainrating?: number, description?: string, phonenumber?: string, categoryname?: string, postalcode?: string, city?: string, owner?: string) {
-
-
+    constructor(id: number = -1, name?: string, adress?: string, workinghours?: string, mainrating?: number, description?: string, phonenumber?: string, categoryname?: string, postalcode?: string, city?: string, owner?: string)
+    {
         this.Name = name;
         this.Address = adress;
         this.WorkingHours = workinghours;

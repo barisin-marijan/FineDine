@@ -46,16 +46,12 @@ namespace FineDine.Controllers
 
 
         // GET: api/CommentsApi/5
-        //[ResponseType(typeof(Comment))]
         public IQueryable<tempComment> GetComment(int id)
         {
             var dbComments = from comment in db.Comments
                              where comment.Establishment.Id == id
                              select new tempComment() { Id = comment.Id, Content = comment.Content, Rating = comment.Rating, Date = comment.DateTime.ToString(), Author = comment.Author.UserName, EstablishmentId = comment.Establishment.Id } ;
-
-
-            //IQueryable<tempComment> tempComments = null;
-
+            
             return dbComments;
         }
 

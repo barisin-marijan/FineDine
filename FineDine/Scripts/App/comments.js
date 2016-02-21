@@ -26,55 +26,16 @@ var CommentsList = (function () {
         this.fetchComments(this.dbId);
         this.usersMatch = false;
         this.checkIfUsersMatch2();
-        //setTimeout(this.usersMatch = this.checkIfUsersMatch(), 3000);
-        //this.usersMatch = this.checkIfUsersMatch();
     }
     CommentsList.prototype.fetchComments = function (id) {
         var _this = this;
         var request = this.http.request("/api/CommentsApi/" + id.toString());
         request.subscribe(function (response) {
             _this.comments = response.json().map(function (cmnt) { return new Comment_1.Comment(cmnt.Id, cmnt.Content, cmnt.Rating, cmnt.Date, cmnt.Author, cmnt.EstablishmentId); });
-            //this.editedEstablishment = x;
         }, function (error) { return alert("Error: " + JSON.stringify(error)); });
     };
     CommentsList.prototype.handleEditButtonClick = function () {
         this.editFlag = true;
-        //        alert(this.editFlag);
-    };
-    CommentsList.prototype.handleCategoryChange = function (value) {
-        if (value == 1)
-            this.editedEstablishment.CategoryName = "Restaurant";
-        else if (value == 2)
-            this.editedEstablishment.CategoryName = "Fast Food";
-        else if (value == 3)
-            this.editedEstablishment.CategoryName = "Bar";
-        else if (value == 4)
-            this.editedEstablishment.CategoryName = "Coffee Shop";
-        //alert(value);
-    };
-    CommentsList.prototype.handleAddressChange = function (value) {
-        this.editedEstablishment.Address = value;
-        //alert(value);
-    };
-    CommentsList.prototype.handleCityChange = function (value) {
-        this.editedEstablishment.City = value;
-        //alert(value);
-    };
-    CommentsList.prototype.handlePostalCodeChange = function (value) {
-        this.editedEstablishment.PostalCode = value;
-        //alert(value);
-    };
-    CommentsList.prototype.handlePhoneChange = function (value) {
-        this.editedEstablishment.PhoneNumber = value;
-        //alert(value);
-    };
-    CommentsList.prototype.handleWHChange = function (value) {
-        this.editedEstablishment.WorkingHours = value;
-    };
-    CommentsList.prototype.handleDoneButton = function () {
-        var _this = this;
-        this.http.put("/api/EstablishmentsApi/" + this.dbId, JSON.stringify(this.editedEstablishment), this.getJsonRequestOptions()).subscribe(function (response) { if (response.status == 200)
-            _this.editFlag = false; }, function (error) { return alert("Error: " + JSON.stringify(error)); });
     };
     CommentsList.prototype.getJsonRequestOptions = function () {
         var headers = new http_1.Headers();

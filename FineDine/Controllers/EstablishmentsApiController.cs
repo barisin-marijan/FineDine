@@ -43,7 +43,6 @@ namespace FineDine.Controllers
 
         public tempEstablishment()
         {
-
         }
     }
 
@@ -71,9 +70,7 @@ namespace FineDine.Controllers
 
             var temp = new tempEstablishment(establishment.Id, establishment.Name, establishment.Address, establishment.WorkingHours, establishment.MainRating, establishment.Description, establishment.PhoneNumber,establishment.Category.Name, establishment.Location.PostCode, establishment.Location.City, establishment.Owner.UserName);
 
-            return Ok(temp);
-            //return Ok(Json(establishment));
-            
+            return Ok(temp);                       
         }
 
         // PUT: api/EstablishmentsApi/5
@@ -81,8 +78,7 @@ namespace FineDine.Controllers
         public IHttpActionResult PutEstablishment(int id, tempEstablishment establishment)
         {
             Establishment newEstablishment = new Establishment();
-            //tempEstablishment est = Json.
-
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -99,7 +95,6 @@ namespace FineDine.Controllers
                                    select estbl;
                 newEstablishment = temp.Single();
                 
-
                 var locationList = db.Locations.ToList();
                 bool locationFlag = true;
 
@@ -153,8 +148,6 @@ namespace FineDine.Controllers
                     }
                 }            
             }
-
-//            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/EstablishmentsApi

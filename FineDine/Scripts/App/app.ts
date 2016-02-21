@@ -83,8 +83,6 @@ export class EstablishmentDetails {
         this.fetchEstablishment(this.dbId);
         this.editFlag = false;
         this.usersMatch = false;
-        //setTimeout(this.usersMatch = this.checkIfUsersMatch(), 3000);
-        //this.usersMatch = this.checkIfUsersMatch();
     }
 
     public fetchEstablishment(id: number): void
@@ -92,7 +90,7 @@ export class EstablishmentDetails {
         let request = this.http.request("/api/EstablishmentsApi/" + id.toString());
 
         request.subscribe((response: Response) => {
-            var x = response.json();//.map(estbl => new Establishment(estbl.Id, estbl.Name, estbl.Address, estbl.WorkingHours, estbl.MainRating, estbl.Description, estbl.PhoneNumber))
+            var x = response.json();
             this.establishment = x;
             this.editedEstablishment = x;
             this.checkIfUsersMatch();
@@ -103,7 +101,6 @@ export class EstablishmentDetails {
 
     public handleEditButtonClick(): void {
         this.editFlag = true;
-//        alert(this.editFlag);
     }
 
     public handleCategoryChange(value: number): void {
@@ -111,27 +108,22 @@ export class EstablishmentDetails {
         else if (value == 2) this.editedEstablishment.CategoryName = "Fast Food";
         else if (value == 3) this.editedEstablishment.CategoryName = "Bar";
         else if (value == 4) this.editedEstablishment.CategoryName = "Coffee Shop";
-        //alert(value);
     }
 
     public handleAddressChange(value: string): void {
         this.editedEstablishment.Address = value;
-        //alert(value);
     }
 
     public handleCityChange(value: string): void {
         this.editedEstablishment.City = value;
-        //alert(value);
     }
 
     public handlePostalCodeChange(value: string): void {
         this.editedEstablishment.PostalCode = value;
-        //alert(value);
     }
 
     public handlePhoneChange(value: string): void {
         this.editedEstablishment.PhoneNumber = value;
-        //alert(value);
     }
 
     public handleWHChange(value: string): void {
@@ -160,14 +152,6 @@ export class EstablishmentDetails {
     }
 
     public checkIfUsersMatch(): void {
-        /*let request = this.http2.request("/api/ServicesApi/GetService/" + "bad-romance", this.getJsonRequestOptions()).subscribe((response: Response) => {
-            if (response.status == 200) {
-                this.usersMatch = true;                
-            }          
-            
-
-        }, (error) => alert("Error: " + JSON.stringify(error)));*/
-
         let request = this.http2.post("/api/ServicesApi/GetService/", JSON.stringify({ un: this.establishment.Owner }), this.getJsonRequestOptions()).subscribe((response: Response) => {
             if (response.status == 200) {
                 this.usersMatch = true;                

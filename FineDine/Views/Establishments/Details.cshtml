@@ -57,42 +57,13 @@
             @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
             @Html.ActionLink("Back to List", "Index")
         </small>
-
-    <!-- COMMENTS inace se generiraju iz baze, ali za sada su hardcodirani-->
-                <h3>Users' comments:</h3>
-                <comments-list id="comments-list" dbId="@Html.DisplayFor(model => model.Id)" dbUsername="@Html.DisplayFor(model=>model.Owner.UserName)">Comments...</comments-list>
+        <h3>Users' comments:</h3>
+        <comments-list id="comments-list" dbId="@Html.DisplayFor(model => model.Id)" dbUsername="@Html.DisplayFor(model=>model.Owner.UserName)">Comments...</comments-list>
 
 
             </div>
             <!-- Blog Sidebar Widgets Column -->
                 <div class="col-md-4" style="margin-top:150px;">
-                    <!-- Side Widget Well
-                    <div class="well">
-                        <h4>Additional information:</h4>
-                        <p class="finedine-text">
-                            Category: @Html.DisplayFor(model => model.Category.Name)
-                            <br />
-                            Adress: @Html.DisplayFor(model => model.Address)
-                            <br />
-                            City: @Html.DisplayFor(model => model.Location.PostCode) @Html.DisplayFor(model => model.Location.City)
-                            <br/>
-                            Phone number: @Html.DisplayFor(model => model.PhoneNumber)
-                            <br/>
-                            Owner: @Html.DisplayFor(model => model.Owner.UserName)
-                            <br />
-                            Working hours: @Html.DisplayFor(model => model.WorkingHours)
-                            <div class="center-align" style="padding-top:5px;">
-                                <br/>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star"></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>
-                                <p class="main-rating"> @Html.DisplayFor(model => model.MainRating) / 5.0 </p>
-                            </div>
-                        </p>
-                    </div> -->
-
                     <establishment-details id="establishment-details" dbId="@Html.DisplayFor(model => model.Id)">Loading</establishment-details>
                 </div>
             </div>
